@@ -1,0 +1,10 @@
+{
+    "states:": [
+        {
+            "name": "q0",
+            "final": 0,
+            "start": 1
+        }
+    ],
+    "transitions": []
+}

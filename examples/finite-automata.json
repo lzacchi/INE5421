@@ -1,0 +1,30 @@
+{
+    "type": "regular-automata",
+    "start": "q0",
+    "final": [
+        "q0",
+        "q1"
+    ],
+    "states": [
+        "q0",
+        "q1",
+        "q2"
+    ],
+    "transitions": [
+        {
+            "symbol": "0",
+            "from": "q0",
+            "to": "q1"
+        },
+        {
+            "symbol": "1",
+            "from": "q1",
+            "to": "q2"
+        },
+        {
+            "symbol": "1",
+            "from": "q2",
+            "to": "q0"
+        }
+    ]
+}

@@ -15,7 +15,7 @@
 .sidenav a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 18px;
   color: rgb(255, 255, 255);
   display: block;
 }
@@ -29,6 +29,10 @@
 .main {
   margin-left: 260px; /* Same as the width of the sidebar */
   padding: 0px 10px;
+}
+
+.col-10 {
+  margin-left: 230px;
 }
 
 .footer {
@@ -50,4 +54,9 @@
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
 }

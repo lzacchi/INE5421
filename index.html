@@ -11,30 +11,46 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
     crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/gojs@2.1/release/go-debug.js"></script>
 </head>
 
-<body>
-  <script src="main.js"></script>
+<body onload="init()">
+  <div id="wrapper" class="row">
+    <!-- Side navigation -->
+    <div class="col-2 sidenav">
+      <a style="color: white; font-size: 25px;"><strong>Trabalho de Formais &#128532 </strong></a>
+      <hr>
+      <a href="#">Autômatos Finitos</a>
+      <a href="#">Gramáticas Regulares</a>
+      <a href="#">Expressões Regulares</a>
+      <div class="mb-3">
+        <label for="formFile" style="color: white;">Subir arquivo</label>
+        <input class="form-control" type="file" id="formFile">
+      </div>
+      <button id="save-btn" class="btn btn-danger" type="button" onclick="saveModel()">SALVAR</button>
+      <br>
+      <button id="save-btn" class="btn btn-dark" type="button" onclick="cage()">CAGE</button>
 
-  <!-- Side navigation -->
-  <div class="sidenav">
-    <a>Trabalho de Formais</a>
-    <a href="#">Automatos</a>
-    <a href="#">Gramáticas</a>
-    <a href="#">REGEX</a>
-    <a href="#">paunocudajerusa</a>
-  </div>
+    </div>
 
-  <!-- Page content -->
-  <div class="main">
-    LOREM IPSUM CARAIOOO
+    <!-- Page content -->
+    <div class="col-10">
+      <div id="board" style="border: solid 1px black; width:100%; min-height:615px;"></div>
+    </div>
   </div>
 
   <div class="footer">
-    <p>Artur Barichello, Lucas Verdade, Lucas Zacchi. This product is not intended for educational uses     .</p>
+    <p>© Artur Barichello, Lucas Verdade & Lucas Zacchi. This software is not intended for educational uses</p>
   </div>
 
+  <script src="main.js"></script>
+  <script src="files.js"></script>
+  <script src="board.js"></script>
 
-</body>
+</html>
+
+</html>
+
+</html>
 
 </html>

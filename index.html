@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Trabalho de Formais</title>
+  <title>Trabalho de Formais &#128532</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/style.css">
@@ -20,23 +20,31 @@
     <div class="col-2 sidenav">
       <a style="color: white; font-size: 25px;"><strong>Trabalho de Formais &#128532 </strong></a>
       <hr>
-      <a href="#">Autômatos Finitos</a>
-      <a href="#">Gramáticas Regulares</a>
+      <a href="#" onclick="show_element('board') && hide_element('grammar')">Autômatos Finitos</a>
+      <a href="#" onclick="hide_element('board') && show_element('grammar')">Gramáticas Regulares</a>
       <a href="#">Expressões Regulares</a>
       <div class="mb-3">
         <label for="formFile" style="color: white;">Subir arquivo</label>
         <input class="form-control" type="file" id="formFile">
       </div>
-      <button id="save-btn" class="btn btn-danger" type="button" onclick="saveModel()">SALVAR</button>
+      <button id="save-btn" class="btn btn-primary" type="button" onclick="saveModel()">SALVAR</button>
       <br>
-      <button id="save-btn" class="btn btn-dark" type="button" onclick="cage()">CAGE</button>
 
     </div>
 
     <!-- Page content -->
     <div class="col-10">
       <div id="board" style="border: solid 1px black; width:100%; min-height:615px;"></div>
+
+      <!-- <div id="grammar"> -->
+
+      <!-- <table> -->
+      <!-- here goes our data! -->
+      <!-- </table> -->
+
+      <!-- </div> -->
     </div>
+  </div>
   </div>
 
   <div class="footer">
@@ -46,11 +54,6 @@
   <script src="main.js"></script>
   <script src="files.js"></script>
   <script src="board.js"></script>
-
-</html>
-
-</html>
-
-</html>
+  <script src="grammar.js"></script>
 
 </html>

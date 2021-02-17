@@ -6,15 +6,53 @@ board = $(go.Diagram, "board", {
 let boardJSON;
 
 function boardInit() {
+  const keyOptions = {
+    margin: 8,
+    font: "bold 11px sans-serif",
+    stroke: '#333',
+  }
+
+  const labelOptions = {
+    margin: 8,
+    font: "bold 11px sans-serif",
+    stroke: '#333',
+    margin: 2,
+  };
+
   board.nodeTemplate =
     $(
       go.Node,
       "Auto",
-      $(go.Shape, "Circle", { strokeWidth: 0, fill: "white" }, new go.Binding("fill", "color")),
-      $(go.TextBlock, { margin: 8, font: "bold 14px sans-serif", stroke: '#333' }, new go.Binding("text", "key"))
+      $(go.Shape, "Circle", { strokeWidth: 1, fill: "white" }, new go.Binding("fill", "color")),
+      $(go.TextBlock, keyOptions, new go.Binding("text", "key")),
+      $(go.TextBlock, labelOptions, new go.Binding("text", "label")),
     );
 
-  loadSample() // test
+  board.linkTemplate =
+    $(go.Link,
+      { curve: go.Link.Bezier },
+      $(go.Shape,
+        { stroke: "black" }),
+      $(go.Shape,
+        { toArrow: "standard", stroke: null }),
+      $(go.Panel, "Auto",
+        $(go.Shape,
+          {
+            fill: $(go.Brush, "Radial", { 0: "rgb(240, 240, 240)", 0.3: "rgb(240, 240, 240)", 1: "rgba(240, 240, 240, 240)" }),
+            stroke: null
+          }),
+        $(go.TextBlock,
+          {
+            textAlign: "center",
+            font: "bold 12pt helvetica, arial, sans-serif",
+            stroke: "#555555",
+            margin: 4
+          },
+          new go.Binding("text", "symbol"))
+      )
+    );
+
+  loadSample()
 }
 
 function loadFile(text) {
@@ -24,10 +62,24 @@ function loadFile(text) {
 }
 
 function loadModel() {
-  const { states, transitions } = boardJSON;
+  const { states, transitions, start, final } = boardJSON;
   board.model = new go.GraphLinksModel(
-    states.map(s => { return { key: s, color: "lightblue" } }),
-    transitions.map(t => { return { from: t.from, to: t.to } }),
+    states.map(state => {
+      let label = "\n\n ";
+      let color = "lightsteelblue"
+      if (state === start) {
+        label = "\n\n->     ";
+        color = "powderblue";
+      } else if (final.includes(state)) {
+        label = "\n\nF:     ";
+        color = "skyblue";
+      }
+
+      return { key: state, color, label };
+    }),
+    transitions.map(t => {
+      return { from: t.from, to: t.to, symbol: t.symbol }
+    }),
   );
 }
 

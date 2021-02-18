@@ -1,26 +1,25 @@
 {
     "type": "regular-grammars",
-
     "terminal": [
-        "a", "b", "c"
+        "a",
+        "b",
+        "c"
     ],
-
-    "non-terminal":"S",
-
-    "production-rules": [
+    "non_terminal": "S",
+    "production_rules": [
         {
             "rule": 0,
-            "non-term": "S",
+            "non_term": "S",
             "product": "aSa"
         },
         {
             "rule": 1,
-            "non-term": "S",
+            "non_term": "S",
             "product": "bSb"
         },
         {
             "rule": 2,
-            "non-term": "S",
+            "non_term": "S",
             "product": "c"
         }
     ]

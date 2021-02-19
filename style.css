@@ -25,6 +25,26 @@
   color: #e95151;
 }
 
+#main-menu {
+  width: 20% !important;
+  max-width: 230px;
+  min-width: 150px;
+  box-shadow: 5px 0 5px -5px #333;
+}
+
+#main-menu > * {
+  margin: 0% 5%;
+}
+
+#main-menu input {
+  width: 75%;
+  margin: 0% 10%;
+}
+
+#main-menu button {
+  margin: 0% 10%;
+}
+
 /* Style page content */
 .main {
   margin-left: 260px; /* Same as the width of the sidebar */

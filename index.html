@@ -17,24 +17,28 @@
 <body onload="init(); hide_element('grammar')">
   <div id="wrapper" class="row">
     <!-- Side navigation -->
-    <div class="col-2 sidenav">
-      <a style="color: white; font-size: 25px;"><strong>Trabalho de Formais &#128532 </strong></a>
-      <hr>
-      <a href="#" onclick="show_element('board'); hide_element('grammar')">Autômatos Finitos</a>
-      <a href="#" onclick="show_element('grammar'); hide_element('board')">Gramáticas Regulares</a>
-      <a href="#">Expressões Regulares</a>
-      <div class="mb-3">
-        <label for="formFile" style="color: white;">Subir arquivo</label>
-        <input class="form-control" type="file" id="formFile">
+    <div class="col-2" style="z-index: 999999;">
+      <div id="main-menu" class="sidenav">
+        <a style="color: white; font-size: 25px;"><strong>Trabalho de Formais &#128532 </strong></a>
+        <hr>
+        <a href="#" onclick="show_element('board'); hide_element('grammar')">Autômatos Finitos</a>
+        <a href="#" onclick="show_element('grammar'); hide_element('board')">Gramáticas Regulares</a>
+        <a href="#">Expressões Regulares</a>
+        <div class="mb-3">
+          <label for="formFile" style="color: white;">
+            <span aria-hidden="true"><a id="formFile-btn" href="#" for="formFile"> Subir arquivo</a></span>
+            <input class="form-control" type="file" id="formFile" style="display: none;">
+          </label>
+        </div>
+        <button id="save-btn" class="btn btn-primary" type="button" onclick="saveModel()">SALVAR</button>
+        <br>
       </div>
-      <button id="save-btn" class="btn btn-primary" type="button" onclick="saveModel()">SALVAR</button>
-      <br>
 
     </div>
 
     <!-- Page content -->
-    <div class="col-10">
-      <div id="board" style="border: solid 1px black; width:100%; min-height:615px;"></div>
+    <div id="content" class="col-10">
+      <div id="board" style="border: solid 1px black; width:90%; min-height:95vh;"></div>
 
       <div id="grammar">
 

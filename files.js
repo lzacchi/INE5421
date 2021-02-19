@@ -1,6 +1,6 @@
 // bota aqui vdd
-document.querySelector("#file-input").addEventListener('change', function () {
-  let file = document.querySelector("#file-input").files[0];
+document.querySelector("#formFile").addEventListener('change', function () {
+  let file = document.querySelector("#formFile").files[0];
   let reader = new FileReader();
   reader.addEventListener('load', function (e) {
     let text = e.target.result;
@@ -9,6 +9,11 @@ document.querySelector("#file-input").addEventListener('change', function () {
     loadModel(text);
   });
   reader.readAsText(file);
+});
+
+document.querySelector('#formFile-btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.querySelector('#formFile').click();
 });
 
 function download(filename, text) {

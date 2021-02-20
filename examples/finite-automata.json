@@ -1,5 +1,5 @@
 {
-    "type": "regular-automata",
+    "type": "finite-automata",
     "start": "apbp",
     "final": [
         "aibi"

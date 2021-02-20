@@ -1,32 +1,34 @@
-let grammar = [
-  { non_terminal: "S", product: " ε | A" },
-  { non_temrinal: "A", product: "aAa | bBb | ac | bc" },
-  { non_terminal: "B", product: "bc | bBc" }
-];
-
-function generateTableHead(table, data) {
-  let thead = table.createTHead();
-  let row = thead.insertRow();
-  for (let key of data) {
-    let th = document.createElement("th");
-    let text = document.createTextNode(key);
-    th.appendChild(text);
-    row.appendChild(th);
-  }
+function loadRegularGrammar() {
 }
 
-function generateTable(table, data) {
-  for (let element of data) {
+async function grammarTableInit() {
+
+  var div = document.getElementById('grammar');
+  while (div.firstChild) {
+    div.removeChild(div.firstChild);
+  }
+
+  document.getElementById('grammar').innerHTML += "<table class='grammar_table'></table>";
+
+  await loadSampleGrammar();
+  const { terminal, nonTerminal, productionRules } = activeJSON;
+  let table = document.querySelector("table");
+  for (const rule of productionRules) {
     let row = table.insertRow();
-    for (key in element) {
+
+    for (var key in rule["non_term"]) {
+
       let cell = row.insertCell();
-      let text = document.createTextNode(element[key]);
+      let content = rule["non_term"][key] + " 🠒 " + rule['productions'].join(" | ");
+
+      let text = document.createTextNode(content);
       cell.appendChild(text);
     }
   }
 }
 
-let table = document.querySelector("table");
-let data = Object.keys(grammar[0]);
-// generateTableHead(table, data);
-generateTable(table, grammar);
+async function loadSampleGrammar() {
+  const sample = await fetch('http://localhost:5500/examples/regular-grammar.json')
+    .then(response => response.json())
+  loadFile(JSON.stringify(sample));
+}

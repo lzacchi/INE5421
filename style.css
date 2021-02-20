@@ -25,23 +25,23 @@
   color: #e95151;
 }
 
-#main-menu {
+.menu {
   width: 20% !important;
   max-width: 230px;
   min-width: 150px;
   box-shadow: 5px 0 5px -5px #333;
 }
 
-#main-menu > * {
+.menu > * {
   margin: 0% 5%;
 }
 
-#main-menu input {
+.menu input {
   width: 75%;
   margin: 0% 10%;
 }
 
-#main-menu button {
+.menu button {
   margin: 0% 10%;
 }
 
@@ -63,7 +63,7 @@
     height: 20px;
     background-color: #6A5ACD;
     color: white;
-    text-align: right;
+    text-align: center;
 }
 
 .footer p {

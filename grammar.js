@@ -8,10 +8,10 @@ async function grammarTableInit() {
     div.removeChild(div.firstChild);
   }
 
-  document.getElementById('grammar').innerHTML += "<table class='grammar_table'></table>";
+  document.getElementById('grammar').innerHTML += "<table class='grammar_table'> <!-- Grammar table --> </table>";
 
   await loadSampleGrammar();
-  const { terminal, nonTerminal, productionRules } = activeJSON;
+  const { terminal, nonTerminal, productionRules } = activeJSON();
   let table = document.querySelector("table");
   for (const rule of productionRules) {
     let row = table.insertRow();
@@ -30,5 +30,5 @@ async function grammarTableInit() {
 async function loadSampleGrammar() {
   const sample = await fetch('http://localhost:5500/examples/regular-grammar.json')
     .then(response => response.json())
-  loadFile(JSON.stringify(sample));
+  loadFile(sample);
 }

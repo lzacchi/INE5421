@@ -3,8 +3,6 @@ board = $(go.Diagram, "board", {
   "undoManager.isEnabled": true
 });
 
-let boardJSON;
-
 function boardInit() {
   const keyOptions = {
     margin: 8,
@@ -52,17 +50,11 @@ function boardInit() {
       )
     );
 
-  loadSample()
+  loadSampleAutomata();
 }
 
-function loadFile(text) {
-  const json = JSON.parse(text);
-  boardJSON = json;
-  loadModel();
-}
-
-function loadModel() {
-  const { states, transitions, start, final } = boardJSON;
+function drawFiniteAutomata() {
+  const { states, transitions, start, final } = activeJSON;
   board.model = new go.GraphLinksModel(
     states.map(state => {
       let label = "\n\n ";
@@ -83,11 +75,7 @@ function loadModel() {
   );
 }
 
-function saveModel() {
-  download("finite-automata.json", JSON.stringify(boardJSON));
-}
-
-async function loadSample() {
+async function loadSampleAutomata() {
   const sample = await fetch('http://localhost:5500/examples/finite-automata.json')
     .then(response => response.json())
 

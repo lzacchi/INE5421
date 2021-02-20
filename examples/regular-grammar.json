@@ -1,0 +1,46 @@
+{
+    "type": "regular-grammar",
+    "terminal": [
+        "a",
+        "b",
+        "c"
+    ],
+    "nonTerminal": "S",
+    "productionRules": [
+        {
+            "non_term": "S",
+            "productions": [
+                "aA",
+                "bB",
+                "cS"
+            ]
+        },
+        {
+            "non_term": "A",
+            "productions": [
+                "aS",
+                "bC",
+                "b",
+                "cA"
+            ]
+        },
+        {
+            "non_term": "B",
+            "productions": [
+                "aC",
+                "a",
+                "bS",
+                "cB"
+            ]
+        },
+        {
+            "non_term": "C",
+            "productions": [
+                "aB",
+                "bA",
+                "cC",
+                "c"
+            ]
+        }
+    ]
+}

@@ -1,10 +1,13 @@
-let activeJSON;
+const jsonEditor = document.querySelector("#json-editor");
 
-function loadFile(text) {
-  const json = JSON.parse(text);
-  activeJSON = json;
+function activeJSON() {
+  return JSON.parse(jsonEditor.value);
+}
 
-  switch (activeJSON.type) {
+function loadFile(json) {
+  jsonEditor.value = JSON.stringify(json, null, 4);
+
+  switch (activeJSON().type) {
     case "finite-automata":
       drawFiniteAutomata();
     case "regular-grammar":
@@ -16,17 +19,13 @@ function loadFile(text) {
 
 // Função que roda quando o arquivo de upload é alterado
 document.querySelector("#formFile").addEventListener('change', function () {
-  let file = document.querySelector("#formFile").files[0];
-  let reader = new FileReader();
+  const file = document.querySelector("#formFile").files[0];
+  const reader = new FileReader();
   reader.addEventListener('load', function (e) {
-    let text = e.target.result;
-    console.log(text); // a partir daqui text é um stringzão do arquivo, só parsear
-    // carregar modelo para exibir no gŕafico de belas e pequenas esferas
-    loadFile(text);
+    const text = e.target.result;
+    loadFile(JSON.parse(text));
     drawFiniteAutomata(text);
   });
-  document.querySelector("#main-menu").style.display = 'none';
-  document.querySelector("#automata-menu").style.display = 'block';
   reader.readAsText(file);
 });
 
@@ -46,13 +45,13 @@ function download(filename, text) {
 }
 
 function saveActiveJSON() {
-  const name = activeJSON.type + ".json";
-  download(name, JSON.stringify(activeJSON));
+  const name = activeJSON().type + ".json";
+  download(name, JSON.stringify(activeJSON()));
 }
 
 function toggleMenu(id) {
-  main_state = document.querySelector("#main-menu").style.display;
-  if (main_state.toLowerCase() === 'none') {
+  const mainState = document.querySelector("#main-menu").style.display;
+  if (mainState.toLowerCase() === 'none') {
     document.querySelector("#main-menu").style.display = "block";
     document.querySelector("#" + id).style.display = "none";
   } else {

@@ -12,6 +12,8 @@
     integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
     crossorigin="anonymous"></script>
   <script src="https://unpkg.com/gojs@2.1/release/go-debug.js"></script>
+  <script src="https://pagecdn.io/lib/ace/1.4.12/ace.min.js" crossorigin="anonymous"
+    integrity="sha256-T5QdmsCQO5z8tBAXMrCZ4f3RX8wVdiA0Fu17FGnU1vU="></script>
 </head>
 
 <body onload="init(); hide_element('grammar')">
@@ -27,20 +29,7 @@
             Gramáticas Regulares
           </a>
           <a href="#">Expressões Regulares</a>
-          <hr>
-
-          <div class="mb-3">
-            <label for="formFile" style="color: white;">
-
-              Manipulação
-              <input id="state-name" type="textarea" placeholder="nome do estado">
-              <input id="state-transition-from" type="textarea" placeholder="origem">
-              <input id="state-transition-to" type="textarea" placeholder="destino">
-              <input id="state-transition-symbol" type="textarea" placeholder="simbolo de transicao">
-
-            </label>
-          </div>
-
+          <a href="#" onclick="show_element('editor-ace');hide_element('board')">EditorTeste</a>
           <hr>
 
           <span aria-hidden="true" class="btn btn-primary">
@@ -54,28 +43,29 @@
           <hr>
 
           <div id="automata-menu" style="display: block">
-            <a href="#" onclick="toggleMenu('automata-menu')">Voltar</a>
-            <a href="#" onclick="createState()">Create State</a>
-            <a href="#" onclick="createTransition()">Create Transition</a>
-            <!-- <a href="#" onclick="">Undo</a>
-            <a href="#" onclick="">Redo</a> -->
             <a href="#" onclick="clearAll()">Clear</a>
           </div>
 
           <hr>
-
-          <input id="json-editor" type="textarea">
-
         </div>
       </div>
     </div>
-
     <!-- Page content -->
-    <div id="content" class="col-10">
-      <div id="board" style="border: solid 1px black; width:90%; min-height:95vh;"></div>
+    <div id="content" class="col-8">
+      <div id="board" style="border: solid 1px black; width:90%; min-height:95vh;margin-left: 2%;"></div>
 
       <div id="grammar">
         <!-- Grammar Table -->
+      </div>
+
+      <div id='editor-ace'>
+      </div>
+    </div>
+    <div id="edit-json" class="col-1">
+      <div>
+        <textarea id="json-editor" type="textarea" style="margin-left: -100%;width: 100%;resize: both;" oninput="draw()"
+          placeholder="json gigante"></textarea>
+        <hr>
       </div>
     </div>
   </div>
@@ -87,8 +77,10 @@
 
   <script src="main.js"></script>
   <script src="files.js"></script>
-  <script src="board.js"></script>
+  <script src="draw.js"></script>
+  <script src="automata.js"></script>
   <script src="grammar.js"></script>
   <script src="actions.js"></script>
+</body>
 
 </html>

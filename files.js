@@ -15,10 +15,13 @@ function loadFile(json) {
   switch (activeJSON().type) {
     case "finite-automata":
       drawFiniteAutomata();
+      break;
     case "regular-grammar":
       drawGrammar();
+      break;
     case "regular-expression":
-    // loadRegularExpression() // TODO
+      // loadRegularExpression() // TODO
+      break;
   }
 }
 

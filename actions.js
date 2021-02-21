@@ -1,3 +1,6 @@
+// const DEBUG = true;
+const DEBUG = false;
+
 function init() {
     boardInit()
 }
@@ -28,18 +31,20 @@ function toggleEditor() {
     switch (editorState) {
         case "":
         case "block":
-            editorButton.text = "Ativar editor"
+            editorButton.text = "Ativar editor";
+            editorButton.className = "btn btn-success";
             break;
 
         case "none":
             editorButton.text = "Desativar editor"
+            editorButton.className = "btn btn-danger";
+
             break;
         default:
             editorButton.text = "Alternar editor"
             break;
     }
 }
-
 
 function clearAll() {
     switch (activeJSON().type) {
@@ -61,7 +66,7 @@ function clearAutomata() {
     "states": [],
     "transitions": []
 }`;
-    editor.setValue(empty);
+    editor.setValue(empty, -1);
     drawFiniteAutomata();
 }
 
@@ -73,6 +78,6 @@ function clearGrammar() {
     "nonTerminal": [],
     "productionRules": []
 }`;
-    editor.setValue(empty);
+    editor.setValue(empty, -1);
     drawGrammar();
 }

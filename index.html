@@ -30,21 +30,21 @@
             Gramáticas Regulares
           </a>
           <a href="#expressoes-regulares">Expressões Regulares</a>
-          <a id="editor-button" href="#" onclick="toggleEditor()">Desativar editor</a>
           <hr>
-
-          <span aria-hidden="true" class="btn btn-primary">
-            <a id="formFile-btn" href="#" for="formFile">
-              Subir arquivo
+          <div id="actions-menu">
+            <h5 style="color: white;text-align: center">Ações</h5>
+            <a id="editor-button" class="btn btn-danger" href="#" onclick="toggleEditor()">Desativar editor</a>
+            <a id="formFile-btn" href="#" for="formFile" aria-hidden="true" class="btn btn-primary">
+              Upload
             </a>
-          </span>
-          <input class="form-control" type="file" id="formFile" style="display: none;">
-          <span id="save-btn" class="btn btn-primary" onclick="saveActiveJSON()">Salvar</span>
+            <input class="form-control" type="file" id="formFile" style="display: none;">
+            <a id="save-btn" class="btn btn-primary" onclick="saveActiveJSON()" href="#"> Salvar</a>
+          </div>
 
           <hr>
 
           <div id="automata-menu" style="display: block">
-            <a href="#" onclick="clearAll()">Clear</a>
+            <a class="btn btn-secondary" href="#" onclick="clearAll()">Limpar</a>
           </div>
 
           <hr>

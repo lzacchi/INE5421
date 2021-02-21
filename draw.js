@@ -11,7 +11,8 @@ function draw() {
 }
 
 function drawFiniteAutomata() {
-    const json = jsonEditor.value;
+    // const json = jsonEditor.value;
+    const json = editor.getValue();
     const { states, transitions, start, final } = activeJSON();
     board.model = new go.GraphLinksModel(
         states.map(state => {
@@ -40,7 +41,8 @@ async function drawGrammar() {
     }
 
     document.getElementById('grammar').innerHTML += "<table class='grammar_table'></table>";
-    const json = jsonEditor.value;
+    // const json = jsonEditor.value;
+    const json = editor.getValue();
     const { terminal, nonTerminal, productionRules } = activeJSON();
     let table = document.querySelector("table");
     for (const rule in productionRules) {

@@ -1,11 +1,16 @@
 const jsonEditor = document.querySelector("#json-editor");
 
+
 function activeJSON() {
-  return JSON.parse(jsonEditor.value);
+  // return JSON.parse(jsonEditor.value);
+  const txt = editor.getValue();
+  return JSON.parse(txt);
 }
 
+
 function loadFile(json) {
-  jsonEditor.value = JSON.stringify(json, null, 4);
+  // jsonEditor.value = JSON.stringify(json, null, 4);
+  editor.setValue(JSON.stringify(json, null, 4));
 
   switch (activeJSON().type) {
     case "finite-automata":

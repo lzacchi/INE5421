@@ -43,7 +43,7 @@ async function drawGrammar() {
     const json = jsonEditor.value;
     const { terminal, nonTerminal, productionRules } = activeJSON();
     let table = document.querySelector("table");
-    for (const rule of productionRules) {
+    for (const rule in productionRules) {
         let row = table.insertRow();
 
         for (var key in rule["non_term"]) {

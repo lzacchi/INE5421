@@ -11,7 +11,7 @@ function loadFile(json) {
     case "finite-automata":
       drawFiniteAutomata();
     case "regular-grammar":
-      loadRegularGrammar();
+      drawGrammar();
     case "regular-expression":
     // loadRegularExpression() // TODO
   }
@@ -24,7 +24,16 @@ document.querySelector("#formFile").addEventListener('change', function () {
   reader.addEventListener('load', function (e) {
     const text = e.target.result;
     loadFile(JSON.parse(text));
-    drawFiniteAutomata(text);
+
+    switch (JSON.parse(text).type) {
+      case "finite-automata":
+        drawFiniteAutomata(text);
+      case "regular-grammar":
+        drawGrammar();
+      // case "regular-expression":
+      // todo
+    }
+
   });
   reader.readAsText(file);
 });

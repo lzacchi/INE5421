@@ -1,5 +1,16 @@
 {
     "type": "regular-grammar",
+    "terminal": [
+        "a",
+        "b",
+        "c"
+    ],
+    "nonTerminal": [
+        "S",
+        "A",
+        "B",
+        "C"
+    ],
     "productionRules": [
         {
             "non_term": "S",

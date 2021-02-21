@@ -28,7 +28,8 @@ async function grammarTableInit() {
 }
 
 async function loadSampleGrammar() {
-  const sample = await fetch('http://localhost:5500/examples/regular-grammar.json')
+  const url = DEBUG === true ? "http://localhost:5500/examples/regular-grammar.json" : "https://raw.githubusercontent.com/lzacchi/INE5421/master/examples/regular-grammar.json?token=AD7KBVVXPKGGEDTHPECONQDAHQFHC"
+  const sample = await fetch(url)
     .then(response => response.json())
   loadFile(sample);
 }

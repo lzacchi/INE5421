@@ -82,7 +82,18 @@ html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
+#editor {
+  box-shadow: -5px 0 5px -5px #333;
+}
 
 .ace-cursor {
   animation: none!important;
+}
+
+#actions-menu a {
+  margin: 2.5% 5%;
+}
+
+#automata-menu a {
+  margin: 2.5% 5%;
 }

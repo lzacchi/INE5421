@@ -67,6 +67,18 @@
           placeholder="json gigante"></textarea>
         <!-- <hr> -->
       </div>
+      <div id="editor" style="height: 100%;">function foo(items) {
+        var x = "All this is syntax highlighted";
+        return x;
+        }</div>
+
+      <script src="/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+      <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/javascript");
+        editor.resize(10);
+      </script>
     </div>
   </div>
   </div>

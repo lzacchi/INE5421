@@ -3,15 +3,17 @@ function draw() {
     switch (type) {
         case "finite-automata":
             drawFiniteAutomata();
+            break;
         case "regular-grammar":
             drawGrammar();
+            break;
         case "regular-expression":
             drawExpression();
+            break;
     }
 }
 
 function drawFiniteAutomata() {
-    // const json = jsonEditor.value;
     const json = editor.getValue();
     const { states, transitions, start, final } = activeJSON();
     board.model = new go.GraphLinksModel(
@@ -35,25 +37,20 @@ function drawFiniteAutomata() {
 }
 
 async function drawGrammar() {
-    var div = document.getElementById('grammar');
+    const div = document.getElementById('grammar');
     while (div.firstChild) {
         div.removeChild(div.firstChild);
     }
-
     document.getElementById('grammar').innerHTML += "<table class='grammar_table'></table>";
-    // const json = jsonEditor.value;
     const json = editor.getValue();
     const { terminal, nonTerminal, productionRules } = activeJSON();
-    let table = document.querySelector("table");
-    for (const rule in productionRules) {
-        let row = table.insertRow();
-
+    const table = document.querySelector("table");
+    for (const rule of productionRules) {
+        const row = table.insertRow();
         for (var key in rule["non_term"]) {
-
-            let cell = row.insertCell();
-            let content = rule["non_term"][key] + " 🠒 " + rule['productions'].join(" | ");
-
-            let text = document.createTextNode(content);
+            const cell = row.insertCell();
+            const content = rule["non_term"][key] + " 🠒 " + rule['productions'].join(" | ");
+            const text = document.createTextNode(content);
             cell.appendChild(text);
         }
     }
@@ -61,4 +58,12 @@ async function drawGrammar() {
 
 function drawExpression() {
     // todo
+}
+
+function triggerToast(title, message) {
+    var myAlert = document.getElementById('liveToast');//select id of toast
+    var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
+    document.querySelector('#toast-title').textContent = title;
+    document.querySelector('#toast-text').textContent = message;
+    bsAlert.show();//show it
 }

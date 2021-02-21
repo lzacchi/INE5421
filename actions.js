@@ -1,16 +1,16 @@
-// const DEBUG = true;
-const DEBUG = false;
+const DEBUG = true;
+// const DEBUG = false;
 
 function init() {
     boardInit()
 }
 
-function show_element(id) {
+function showElement_(id) {
     var element = document.getElementById(id);
     element.style.display = 'block';
 }
 
-function hide_element(id) {
+function hideElement(id) {
     var element = document.getElementById(id);
     element.style.display = 'none';
 }

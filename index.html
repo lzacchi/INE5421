@@ -19,7 +19,7 @@
     crossorigin="anonymous"></script>
 </head>
 
-<body onload="init(); hide_element('grammar')">
+<body onload="init(); hideElement('grammar')">
   <div id="wrapper" class="row">
     <!-- Side navigation -->
     <div class="col-2" style="z-index: 999999;">
@@ -27,9 +27,9 @@
         <a style="color: white; font-size: 25px;"><strong>Trabalho de Formais &#128532</strong></a>
         <hr>
         <div id="main-menu">
-          <a href="#automatos-finitos" onclick="show_element('board'); hide_element('grammar');boardInit()">Autômatos
+          <a href="#automatos-finitos" onclick="showElement_('board'); hideElement('grammar');boardInit()">Autômatos
             Finitos</a>
-          <a href="#gramaticas-regulares" onclick="show_element('grammar'); hide_element('board'); grammarTableInit()">
+          <a href="#gramaticas-regulares" onclick="showElement_('grammar'); hideElement('board'); grammarTableInit()">
             Gramáticas Regulares
           </a>
           <a href="#expressoes-regulares">Expressões Regulares</a>
@@ -42,6 +42,8 @@
             </a>
             <input class="form-control" type="file" id="formFile" style="display: none;">
             <a id="save-btn" class="btn btn-primary" onclick="saveActiveJSON()" href="#"> Salvar</a>
+            <!-- <button type="button" class="btn btn-primary" id="liveToastBtn" onclick="triggerToast()">Show live
+              toast</button> -->
           </div>
 
           <hr>
@@ -53,16 +55,32 @@
           <hr>
         </div>
       </div>
+      <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999999999999999">
+        <div id="liveToast" class="toast hide bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong id="toast-title" class="me-auto">Bootstrap</strong>
+            <small id="toast-time">agora</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div id="toast-text" class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Page content -->
     <div id="content" class="col-6">
+      <!-- Finite Automata Board -->
       <div id="board" style="border: solid 1px black; width:100%; min-height:95vh;margin-left: 2%;"></div>
 
       <div id="grammar" style="height:100%">
         <!-- Grammar Table -->
       </div>
-
-      <div id='editor-ace'>
+      <!-- Regular Expression -->
+      <div id='regexp' style="display:none">
+        <textarea id="regexpcustom" cols="30" rows="10"></textarea>
+        <textarea id="regexpinput" cols="30" rows="10"></textarea>
+        <p id="regexpresult"></p>
       </div>
     </div>
     <div id="edit-json" class="col-4" style="height: 98vh;">
@@ -70,8 +88,8 @@
         <textarea id="json-editor" type="textarea" style="width: 100%;resize: both;" oninput="draw()"
           placeholder="json gigante"></textarea>
       </div>
-      <div id="editor" style="height: 100%;display: block;" oninput="draw()"></div>
 
+      <div id="editor" style="height: 100%;display: block;" oninput="draw()"></div>
 
       <script>
         var editor = ace.edit("editor");
@@ -80,6 +98,7 @@
         editor.session.setValue("'There's an entire holiday dedicated\n to what would happen if cats and dogs\n had opposable thumbs.'");
       </script>
     </div>
+
   </div>
   </div>
 

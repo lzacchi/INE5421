@@ -1,15 +1,15 @@
-const jsonEditor = document.querySelector("#json-editor");
-
-
 function activeJSON() {
-  // return JSON.parse(jsonEditor.value);
   const txt = editor.getValue();
-  return JSON.parse(txt);
+  var ret
+  try {
+    ret = JSON.parse(txt);
+  } catch (e) {
+    triggerToast("JSON Editor Error", e);
+  }
+  return ret;
 }
 
-
 function loadFile(json) {
-  // jsonEditor.value = JSON.stringify(json, null, 4);
   editor.setValue(JSON.stringify(json, null, 4), -1);
 
   switch (activeJSON().type) {

@@ -19,7 +19,7 @@
     crossorigin="anonymous"></script>
 </head>
 
-<body onload="init(); hideElement('grammar')">
+<body onload="init(); hideElement('grammar');hideElement('regexp');">
   <div id="wrapper" class="row">
     <!-- Side navigation -->
     <div class="col-2" style="z-index: 999999;">
@@ -32,7 +32,8 @@
           <a href="#gramaticas-regulares" onclick="showElement_('grammar'); hideElement('board'); grammarTableInit()">
             Gramáticas Regulares
           </a>
-          <a href="#expressoes-regulares">Expressões Regulares</a>
+          <a href="#expressoes-regulares"
+            onclick="showElement_('regexp'); hideElement('board');hideElement('grammar');">Expressões Regulares</a>
           <hr>
           <div id="actions-menu">
             <h5 style="color: white;text-align: center">Ações</h5>
@@ -78,9 +79,21 @@
       </div>
       <!-- Regular Expression -->
       <div id='regexp' style="display:none">
-        <textarea id="regexpcustom" cols="30" rows="10"></textarea>
-        <textarea id="regexpinput" cols="30" rows="10"></textarea>
-        <p id="regexpresult"></p>
+        <ul class="list-unstyled">
+          <li>
+            <label for="regexp-custom">Sua RegExp:</label><br>
+            <textarea onchange="runRegExp()" id="regexp-custom" cols="30" rows="10"></textarea>
+          </li>
+          <li>
+            <label for="regexp-input">Entrada:</label><br>
+            <textarea onchange="runRegExp()" id="regexp-input" cols="30" rows="10"></textarea>
+          </li>
+          <hr>
+          <li>
+            <label for="regexp-result">Resultados:</label>Em breve &#128532<br>
+            <p id="regexp-result"></p>
+          </li>
+        </ul>
       </div>
     </div>
     <div id="edit-json" class="col-4" style="height: 98vh;">
@@ -95,7 +108,7 @@
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/tomorrow_night");
         editor.session.setMode("ace/mode/json");
-        editor.session.setValue("'There's an entire holiday dedicated\n to what would happen if cats and dogs\n had opposable thumbs.'");
+        editor.session.setValue("😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔\n".repeat(100));
       </script>
     </div>
 
@@ -111,6 +124,7 @@
   <script src="automata.js"></script>
   <script src="grammar.js"></script>
   <script src="actions.js"></script>
+  <script src="regexp.js"></script>
 </body>
 
 </html>

@@ -27,30 +27,26 @@
         <a style="color: white; font-size: 25px;"><strong>Trabalho de Formais &#128532</strong></a>
         <hr>
         <div id="main-menu">
+          <!-- Submenu de categoria -->
           <a href="#automatos-finitos"
             onclick="showElement_('board'); hideElement('grammar');hideElement('regexp');boardInit()">Autômatos
             Finitos</a>
           <a href="#gramaticas-regulares"
-            onclick="showElement_('grammar'); hideElement('board');hideElement('regexp'); grammarTableInit()">
-            Gramáticas Regulares
-          </a>
+            onclick="showElement_('grammar'); hideElement('board');hideElement('regexp'); grammarTableInit()">Gramáticas
+            Regulares</a>
           <a href="#expressoes-regulares"
             onclick="showElement_('regexp'); hideElement('board');hideElement('grammar');">Expressões Regulares</a>
           <hr>
+          <!-- Submenu de ações -->
           <div id="actions-menu">
             <h5 style="color: white;text-align: center">Ações</h5>
             <a id="editor-button" class="btn btn-danger" href="#" onclick="toggleEditor()">Desativar editor</a>
-            <a id="formFile-btn" href="#" for="formFile" aria-hidden="true" class="btn btn-primary">
-              Upload
-            </a>
+            <a id="formFile-btn" href="#" for="formFile" aria-hidden="true" class="btn btn-primary">Upload</a>
             <input class="form-control" type="file" id="formFile" style="display: none;">
             <a id="save-btn" class="btn btn-primary" onclick="saveActiveJSON()" href="#"> Salvar</a>
-            <!-- <button type="button" class="btn btn-primary" id="liveToastBtn" onclick="triggerToast()">Show live
-              toast</button> -->
           </div>
 
           <hr>
-
           <div id="automata-menu" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="clearAll()">Limpar</a>
           </div>
@@ -58,27 +54,27 @@
           <hr>
         </div>
       </div>
+
+      <!-- Toast - erro message div  -->
       <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999999999999999">
         <div id="liveToast" class="toast hide bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header">
-            <strong id="toast-title" class="me-auto">Bootstrap</strong>
-            <small id="toast-time">agora</small>
+            <strong id="toast-title" class="me-auto">Default title</strong>
+            <small id="toast-time">0 min</small>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
-          <div id="toast-text" class="toast-body">
-            Hello, world! This is a toast message.
-          </div>
+          <div id="toast-text" class="toast-body">Toast message.</div>
         </div>
       </div>
     </div>
     <!-- Page content -->
     <div id="content" class="col-6">
       <!-- Finite Automata Board -->
-      <div id="board" style="border: solid 1px black; width:100%; min-height:95vh;margin-left: 2%;"></div>
+      <div id="board" style=" width:100%; min-height:95vh;margin-left: 2%;"></div>
 
-      <div id="grammar" style="height:100%">
-        <!-- Grammar Table -->
-      </div>
+      <!-- Grammar Table -->
+      <div id="grammar" style="height:100%"></div>
+
       <!-- Regular Expression -->
       <div id='regexp' style="display:none">
         <ul class="list-unstyled">
@@ -97,20 +93,18 @@
           </li>
         </ul>
       </div>
+
     </div>
     <div id="edit-json" class="col-4" style="height: 98vh;">
-      <div style="display: none">
-        <textarea id="json-editor" type="textarea" style="width: 100%;resize: both;" oninput="draw()"
-          placeholder="json gigante"></textarea>
-      </div>
-
+      <!-- Editor placeholder -->
       <div id="editor" style="height: 100%;display: block;" oninput="draw()"></div>
 
+      <!-- Initializing editor -->
       <script>
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/tomorrow_night");
         editor.session.setMode("ace/mode/json");
-        editor.session.setValue("😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔😔\n".repeat(100));
+        editor.session.setValue((('😔'.repeat(56)) + '\n').repeat(100));
       </script>
     </div>
 

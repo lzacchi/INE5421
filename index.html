@@ -27,9 +27,11 @@
         <a style="color: white; font-size: 25px;"><strong>Trabalho de Formais &#128532</strong></a>
         <hr>
         <div id="main-menu">
-          <a href="#automatos-finitos" onclick="showElement_('board'); hideElement('grammar');boardInit()">Autômatos
+          <a href="#automatos-finitos"
+            onclick="showElement_('board'); hideElement('grammar');hideElement('regexp');boardInit()">Autômatos
             Finitos</a>
-          <a href="#gramaticas-regulares" onclick="showElement_('grammar'); hideElement('board'); grammarTableInit()">
+          <a href="#gramaticas-regulares"
+            onclick="showElement_('grammar'); hideElement('board');hideElement('regexp'); grammarTableInit()">
             Gramáticas Regulares
           </a>
           <a href="#expressoes-regulares"

@@ -2,7 +2,7 @@
 const DEBUG = false;
 
 function init() {
-    boardInit()
+    boardInit();
 }
 
 function showElement_(id) {

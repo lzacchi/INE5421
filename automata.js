@@ -54,7 +54,7 @@ function boardInit() {
 }
 
 async function loadSampleAutomata() {
-  const url = DEBUG === true ? "http://localhost:5500/examples/finite-automata.json" : "https://raw.githubusercontent.com/lzacchi/INE5421/master/examples/finite-automata.json?token=AD7KBVTVVOLCGJKDNXJH5TDAHQFKQ"
+  const url = DEBUG === true ? "http://localhost:5500/examples/finite-automata.json" : "https://gist.githubusercontent.com/aBARICHELLO/b84ca2d0f99b54e98d8adbcc0609e8ab/raw/086045a265f5cd52eec6571eb6e16ac3fa1e7c49/finite-automata.json"
   const sample = await fetch(url)
     .then(response => response.json())
   loadFile(sample);

@@ -50,6 +50,13 @@
           <div id="automata-menu" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="clearAll()">Limpar</a>
           </div>
+          <hr>
+
+          <!-- todo: trocar pra uma segunda aba do ACE, colocar valor inicial do editor com o exemplo padrão tb -->
+          <textarea id="second-editor" placeholder=""></textarea>
+          <div id="union-button" style="display: block">
+            <a class="btn btn-secondary" href="#" onclick="union()">U</a>
+          </div>
 
           <hr>
         </div>
@@ -67,6 +74,7 @@
         </div>
       </div>
     </div>
+
     <!-- Page content -->
     <div id="content" class="col-6">
       <!-- Finite Automata Board -->
@@ -121,6 +129,8 @@
   <script src="grammar.js"></script>
   <script src="actions.js"></script>
   <script src="regexp.js"></script>
+
+  <script src="algorithms/union.js"></script>
 </body>
 
 </html>

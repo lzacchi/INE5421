@@ -10,7 +10,7 @@ function activeJSON() {
 }
 
 function loadFile(json) {
-  editor.setValue(JSON.stringify(json, null, 4), -1);
+  setEditorText(json);
 
   switch (activeJSON().type) {
     case "finite-automata":

@@ -65,14 +65,3 @@ function saveActiveJSON() {
   const name = activeJSON().type + ".json";
   download(name, JSON.stringify(activeJSON()));
 }
-
-function toggleMenu(id) {
-  const mainState = document.querySelector("#main-menu").style.display;
-  if (mainState.toLowerCase() === 'none') {
-    document.querySelector("#main-menu").style.display = "block";
-    document.querySelector("#" + id).style.display = "none";
-  } else {
-    document.querySelector("#main-menu").style.display = "none";
-    document.querySelector("#" + id).style.display = "block";
-  }
-}

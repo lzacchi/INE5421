@@ -20,7 +20,10 @@ function drawFiniteAutomata() {
         states.map(state => {
             let label = "\n\n ";
             let color = "lightsteelblue"
-            if (state === start) {
+            if (state === start && final.includes(state)) {
+                label = "\n\n-> F:    ";
+                color = "skyblue";
+            } else if (state === start) {
                 label = "\n\n->     ";
                 color = "powderblue";
             } else if (final.includes(state)) {

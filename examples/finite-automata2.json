@@ -1,0 +1,33 @@
+{
+    "type": "finite-automata",
+    "start": "even",
+    "final": [
+        "odd"
+    ],
+    "states": [
+        "even",
+        "odd"
+    ],
+    "transitions": [
+        {
+            "from": "even",
+            "to": "odd",
+            "symbol": "1"
+        },
+        {
+            "from": "odd",
+            "to": "even",
+            "symbol": "1"
+        },
+        {
+            "from": "even",
+            "to": "even",
+            "symbol": "0"
+        },
+        {
+            "from": "odd",
+            "to": "odd",
+            "symbol": "0"
+        }
+    ]
+}

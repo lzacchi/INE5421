@@ -15,8 +15,10 @@ function union() {
     "final": [
       "qf-new",
     ],
-    "states": ["q0-new","qf-new"].concat(json.states),
+    "states": ["q0-new","qf-new"].concat(json.states, inputJSON.states),
     "transitions": json.transitions.concat(
+      inputJSON.transitions,
+
       // q0-new to old start states by &
       oldStartStates.map((oldStart) => {
         return {
@@ -38,4 +40,5 @@ function union() {
   }
 
   setEditorText(newAutomata);
+  drawFiniteAutomata();
 }

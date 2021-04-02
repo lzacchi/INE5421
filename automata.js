@@ -72,3 +72,7 @@ function applyBinaryOperation(operation) {
   }
   operation(json, inputJSON);
 }
+
+function automataToGrammar() {
+
+}

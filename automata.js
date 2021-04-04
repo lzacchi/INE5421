@@ -72,3 +72,90 @@ function applyBinaryOperation(operation) {
   }
   operation(json, inputJSON);
 }
+
+function determinizeNFA() {
+  const { states, transitions, start, final } = activeJSON();
+
+  const hasEpsilon = checkEpsilonTransition(transitions);
+  // transition_map it's like:
+  // transition_map[source][symbol] = [list of sinks]
+
+  // initaliazing transition table
+  let transition_map;
+  let symbol_list;
+  let repeat = true;
+  transition_map = {};
+  symbol_list = [];
+  while (repeat) {
+    for (const ts of transitions) {
+      // defining new transition
+      if (typeof transition_map[ts.from] === "undefined") {
+        transition_map[ts.from] = {};
+      }
+      if (typeof transition_map[ts.from][ts.symbol] === "undefined") {
+        transition_map[ts.from][ts.symbol] = [];
+      }
+      // appending a new symbol fro
+      transition_map[ts.from][ts.symbol].push(ts.to);
+      symbol_list.push(ts.symbol);
+    }
+    const alfabet_set = [...new Set(symbol_list)];
+
+    // creating new states 
+    for (let tm in transition_map) {
+      for (let s in transition_map[tm]) {
+        // new state found
+        if (transition_map[tm][s].length > 1) {
+          // checking if the new state already exists else define it
+          if (typeof transition_map[transition_map[tm][s]] === "undefined") {
+            transition_map[transition_map[tm][s]] = null;
+          }
+        }
+
+        // calculate new states transitions that still are null
+        console.log(tm);
+        transition_map[tm] = 1;
+        if (tm.includes(',') && transition_map[tm] === null) {
+          let states_ = tm.split(',');
+          console.log('ENTROU no estado composto');
+          transition_map[tm] = 1;
+          // console.log(transition_map);
+          // console.log(transition_map[tm]);
+          // for (let sym of symbol_list) {
+          //   let new_transition = [];
+          //   for (let st of states_) {
+          //     if (transition_map[st][sym].length > 1) {
+          //       new_transition.push(...transition_map[st][sym]); // appending each state, not the array
+          //       console.log("push no estado");
+          //     } else {
+          //       new_transition.push(transition_map[st][sym]);
+          //     }
+          //   }
+          //   console.log('adicionando novo array de estados');
+          //   transition_map[tm][sym] = [...new_transition]
+          // }
+        }
+      }
+    }
+    repeat = !Object.values(transition_map).every(o => o !== null);
+  }
+
+  if (hasEpsilon) {
+    // nfa to dfa algorithm
+    //check new states
+
+  } else {
+
+  }
+
+}
+
+function checkEpsilonTransition(transitions) {
+  for (t of transitions) {
+    if (t.symbol === "&") {
+      return true;
+    }
+  }
+  return false;
+}
+

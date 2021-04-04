@@ -16,8 +16,8 @@ function grammarToAutomata() {
         var to = "Final";
         var symbol = productionRules[rule]["productions"][prod][0];
       } else {
-        var symbol = productionRules[rule]["productions"][prod][0];
-        var to = productionRules[rule]["productions"][prod][1];
+        symbol = productionRules[rule]["productions"][prod][0];
+        to = productionRules[rule]["productions"][prod][1];
       }
 
       transistions.push({
@@ -39,4 +39,39 @@ function grammarToAutomata() {
   setEditorText(automata);
   drawFiniteAutomata();
   showAutomata();
+}
+
+function automataToGrammar() {
+
+  var automata = activeJSON();
+
+  var grammar = {
+    "type": "regular-grammar",
+    "terminal": [],
+    "nonTerminal": automata.states,
+    "productionRules": []
+  }
+
+
+  for (const transition in automata.transitions) {
+    grammar.terminal.push(automata.transitions[transition].symbol);
+    var rule = {
+      "non_term" : automata.transitions[transition].from,
+      "productions": [automata.transitions[transition].symbol + automata.transitions[transition].to]
+    }
+    const ruleIndex = grammar.productionRules.findIndex((el) => el.non_term === rule.non_term)
+    if (ruleIndex === -1) {
+      grammar.productionRules.push(rule);
+    } else {
+      grammar.productionRules[ruleIndex].productions = grammar.productionRules[ruleIndex].productions.concat(rule.productions);
+    }
+  }
+
+  grammar['terminal'] = [...new Set(grammar.terminal)];
+  // console.log(grammar);
+
+  setEditorText(grammar);
+  drawGrammar();
+  showGrammar();
+
 }

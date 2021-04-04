@@ -50,7 +50,7 @@ function boardInit() {
       )
     );
 
-  const url = DEBUG === true ? "http://localhost:5500/examples/finite-automata.json" : "https://gist.githubusercontent.com/aBARICHELLO/b84ca2d0f99b54e98d8adbcc0609e8ab/raw/086045a265f5cd52eec6571eb6e16ac3fa1e7c49/finite-automata.json"
+  const url = DEBUG === true ? "http://localhost:5500/examples/finite-automata.json" : "https://gist.githubusercontent.com/aBARICHELLO/b84ca2d0f99b54e98d8adbcc0609e8ab/raw/0dd05ee84c44b133eaa153b9ebb26ccb3201c9e3/finite-automata.json"
   const url2 = DEBUG === true ? "http://localhost:5500/examples/finite-automata2.json" : "https://gist.githubusercontent.com/aBARICHELLO/3098adfbebbf83ba26f1ab021fdce812/raw/6f5976e796115670616c72c56f8b97e08db8c7e2/finite-automata2.json"
   loadSampleAutomata(url);
   loadSampleAutomata(url2, true);

@@ -59,6 +59,9 @@
           <div id="union-button" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(intersection)">Interseção (∩)</a>
           </div>
+          <div id="union-button" style="display: block">
+            <a class="btn btn-secondary" href="#" onclick="verify()">Verificar sentença</a>
+          </div>
 
           <hr>
         </div>
@@ -66,7 +69,7 @@
 
       <!-- Toast - erro message div  -->
       <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999999999999999">
-        <div id="liveToast" class="toast hide bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="liveToast" class="toast hide bg-info" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header">
             <strong id="toast-title" class="me-auto">Default title</strong>
             <small id="toast-time">0 min</small>
@@ -140,6 +143,7 @@
 
   <script src="algorithms/union.js"></script>
   <script src="algorithms/intersection.js"></script>
+  <script src="algorithms/verify.js"></script>
 </body>
 
 </html>

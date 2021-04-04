@@ -55,7 +55,10 @@
           <!-- todo: trocar pra uma segunda aba do ACE, colocar valor inicial do editor com o exemplo padrão tb -->
           <textarea id="second-editor" placeholder=""></textarea>
           <div id="union-button" style="display: block">
-            <a class="btn btn-secondary" href="#" onclick="union()">U</a>
+            <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(union)">U</a>
+          </div>
+          <div id="union-button" style="display: block">
+            <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(intersection)">∩</a>
           </div>
 
           <hr>
@@ -131,6 +134,7 @@
   <script src="regexp.js"></script>
 
   <script src="algorithms/union.js"></script>
+  <script src="algorithms/intersection.js"></script>
 </body>
 
 </html>

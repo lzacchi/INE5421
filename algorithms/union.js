@@ -1,23 +1,15 @@
-function union() {
-  const json = activeJSON();
-  const editorText = document.getElementById("second-editor").value;
-  const inputJSON = JSON.parse(editorText);
-  if (json.type !== "finite-automata" || inputJSON.type !== "finite-automata") {
-    triggerToast("Erro", "Operação não suportada para os tipos de linguagem selecionados")
-    return;
-  }
-
-  const oldStartStates = [json.start, inputJSON.start];
-  const oldFinalStates = json.final.concat(inputJSON.final);
+function union(automataA, automataB) {
+  const oldStartStates = [automataA.start, automataB.start];
+  const oldFinalStates = automataA.final.concat(automataB.final);
   const newAutomata = {
     "type": "finite-automata",
     "start": "q0-new",
     "final": [
       "qf-new",
     ],
-    "states": ["q0-new","qf-new"].concat(json.states, inputJSON.states),
-    "transitions": json.transitions.concat(
-      inputJSON.transitions,
+    "states": ["q0-new","qf-new"].concat(automataA.states, automataB.states),
+    "transitions": automataA.transitions.concat(
+      automataB.transitions,
 
       // q0-new to old start states by &
       oldStartStates.map((oldStart) => {
@@ -41,4 +33,5 @@ function union() {
 
   setEditorText(newAutomata);
   drawFiniteAutomata();
+  return newAutomata;
 }

@@ -59,3 +59,14 @@ async function loadSampleAutomata() {
     .then(response => response.json())
   loadFile(sample);
 }
+
+function applyBinaryOperation(operation) {
+  const json = activeJSON();
+  const editorText = document.getElementById("second-editor").value;
+  const inputJSON = JSON.parse(editorText);
+  if (json.type !== "finite-automata" || inputJSON.type !== "finite-automata") {
+    triggerToast("Erro", "Operação não suportada para os tipos de linguagem selecionados")
+    return;
+  }
+  operation(json, inputJSON);
+}

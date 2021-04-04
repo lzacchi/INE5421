@@ -70,3 +70,15 @@ function triggerToast(title, message) {
     document.querySelector('#toast-text').textContent = message;
     bsAlert.show();//show it
 }
+
+function showAutomata() {
+  showElement_('board'); hideElement('grammar');hideElement('regexp');
+}
+
+function showGrammar() {
+  showElement_('grammar'); hideElement('board');hideElement('regexp');grammarTableInit();
+}
+
+function showRegex() {
+  showElement_('regexp'); hideElement('board');hideElement('grammar');
+}

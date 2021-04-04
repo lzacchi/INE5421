@@ -29,13 +29,13 @@
         <div id="main-menu">
           <!-- Submenu de categoria -->
           <a href="#automatos-finitos"
-            onclick="showElement_('board'); hideElement('grammar');hideElement('regexp');boardInit()">Autômatos
+            onclick="showAutomata()">Autômatos
             Finitos</a>
           <a href="#gramaticas-regulares"
-            onclick="showElement_('grammar'); hideElement('board');hideElement('regexp'); grammarTableInit()">Gramáticas
+            onclick="showGrammar()">Gramáticas
             Regulares</a>
           <a href="#expressoes-regulares"
-            onclick="showElement_('regexp'); hideElement('board');hideElement('grammar');">Expressões Regulares</a>
+            onclick="showRegex()">Expressões Regulares</a>
           <hr>
           <!-- Submenu de ações -->
           <div id="actions-menu">
@@ -67,13 +67,8 @@
           <div id="union-button" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="grammarToAutomata()">Gramática -> Autômato (U)</a>
           </div>
-          <!-- <div id="union-button" style="display: block"> -->
-          <!-- <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(intersection)">Interseção (∩)</a> -->
-          <!-- </div> -->
 
           <hr>
-
-
         </div>
       </div>
 
@@ -154,6 +149,7 @@
   <script src="algorithms/union.js"></script>
   <script src="algorithms/intersection.js"></script>
   <script src="algorithms/verify.js"></script>
+  <script src="algorithms/afd-gr.js"></script>
 </body>
 
 </html>

@@ -9,8 +9,8 @@ function activeJSON() {
   return ret;
 }
 
-function loadFile(json) {
-  editor.setValue(JSON.stringify(json, null, 4), -1);
+function loadFile(json, secondEditor = false) {
+  setEditorText(json, secondEditor);
 
   switch (activeJSON().type) {
     case "finite-automata":
@@ -64,15 +64,4 @@ function download(filename, text) {
 function saveActiveJSON() {
   const name = activeJSON().type + ".json";
   download(name, JSON.stringify(activeJSON()));
-}
-
-function toggleMenu(id) {
-  const mainState = document.querySelector("#main-menu").style.display;
-  if (mainState.toLowerCase() === 'none') {
-    document.querySelector("#main-menu").style.display = "block";
-    document.querySelector("#" + id).style.display = "none";
-  } else {
-    document.querySelector("#main-menu").style.display = "none";
-    document.querySelector("#" + id).style.display = "block";
-  }
 }

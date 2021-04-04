@@ -25,6 +25,15 @@ function toggleDiv(id) {
     return divState.toLowerCase();
 }
 
+function setEditorText(value, secondEditor = false) {
+    const selectedEditor = secondEditor ? editor2 : editor;
+    if (typeof(value) === "object"){
+        selectedEditor.setValue(JSON.stringify(value, null, 4), -1);
+    } else {
+        selectedEditor.setValue(value, -1);
+    }
+}
+
 function toggleEditor() {
     const editorState = toggleDiv('editor');
     let editorButton = document.querySelector("#editor-button");
@@ -66,7 +75,7 @@ function clearAutomata() {
     "states": [],
     "transitions": []
 }`;
-    editor.setValue(empty, -1);
+    setEditorText(empty);
     drawFiniteAutomata();
 }
 
@@ -78,6 +87,6 @@ function clearGrammar() {
     "nonTerminal": [],
     "productionRules": []
 }`;
-    editor.setValue(empty, -1);
+    setEditorText(empty);
     drawGrammar();
 }

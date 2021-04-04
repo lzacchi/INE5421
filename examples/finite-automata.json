@@ -64,12 +64,12 @@
         {
             "from": "aibi",
             "to": "apbi",
-            "symbol": "b"
+            "symbol": "a"
         },
         {
             "from": "apbi",
             "to": "aibi",
-            "symbol": "b"
+            "symbol": "a"
         }
     ]
 }

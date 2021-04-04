@@ -50,12 +50,25 @@ function boardInit() {
       )
     );
 
-  loadSampleAutomata();
+  const url = DEBUG === true ? "http://localhost:5500/examples/finite-automata.json" : "https://gist.githubusercontent.com/aBARICHELLO/b84ca2d0f99b54e98d8adbcc0609e8ab/raw/086045a265f5cd52eec6571eb6e16ac3fa1e7c49/finite-automata.json"
+  const url2 = DEBUG === true ? "http://localhost:5500/examples/finite-automata2.json" : "https://gist.githubusercontent.com/aBARICHELLO/3098adfbebbf83ba26f1ab021fdce812/raw/6f5976e796115670616c72c56f8b97e08db8c7e2/finite-automata2.json"
+  loadSampleAutomata(url);
+  loadSampleAutomata(url2, true);
 }
 
-async function loadSampleAutomata() {
-  const url = DEBUG === true ? "http://localhost:5500/examples/finite-automata.json" : "https://gist.githubusercontent.com/aBARICHELLO/b84ca2d0f99b54e98d8adbcc0609e8ab/raw/086045a265f5cd52eec6571eb6e16ac3fa1e7c49/finite-automata.json"
+async function loadSampleAutomata(url, secondEditor = false) {
   const sample = await fetch(url)
     .then(response => response.json())
-  loadFile(sample);
+  loadFile(sample, secondEditor);
+}
+
+function applyBinaryOperation(operation) {
+  const json = activeJSON();
+  const editorText = editor2.getValue();
+  const inputJSON = JSON.parse(editorText);
+  if (json.type !== "finite-automata" || inputJSON.type !== "finite-automata") {
+    triggerToast("Erro", "Operação não suportada para os tipos de linguagem selecionados")
+    return;
+  }
+  operation(json, inputJSON);
 }

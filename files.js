@@ -9,8 +9,8 @@ function activeJSON() {
   return ret;
 }
 
-function loadFile(json) {
-  setEditorText(json);
+function loadFile(json, secondEditor = false) {
+  setEditorText(json, secondEditor);
 
   switch (activeJSON().type) {
     case "finite-automata":

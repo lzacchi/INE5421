@@ -25,11 +25,12 @@ function toggleDiv(id) {
     return divState.toLowerCase();
 }
 
-function setEditorText(value) {
+function setEditorText(value, secondEditor = false) {
+    const selectedEditor = secondEditor ? editor2 : editor;
     if (typeof(value) === "object"){
-        editor.setValue(JSON.stringify(value, null, 4), -1);
+        selectedEditor.setValue(JSON.stringify(value, null, 4), -1);
     } else {
-        editor.setValue(value, -1);
+        selectedEditor.setValue(value, -1);
     }
 }
 

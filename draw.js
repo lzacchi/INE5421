@@ -45,17 +45,21 @@ async function drawGrammar() {
         div.removeChild(div.firstChild);
     }
     document.getElementById('grammar').innerHTML += "<table class='grammar_table'></table>";
-    const json = editor.getValue();
     const { terminal, nonTerminal, productionRules } = activeJSON();
     const table = document.querySelector("table");
+
     for (const rule of productionRules) {
         const row = table.insertRow();
-        for (var key in rule["non_term"]) {
-            const cell = row.insertCell();
-            const content = rule["non_term"][key] + " 🠒 " + rule['productions'].join(" | ");
-            const text = document.createTextNode(content);
-            cell.appendChild(text);
+        console.log(rule);
+
+        const cell = row.insertCell();
+        var content = rule.non_term + " 🠒 ";
+        for (var key in rule.productions) {
+            content+= rule.productions[key] + " | ";
+
         }
+        const text = document.createTextNode(content);
+        cell.appendChild(text);
     }
 }
 
@@ -69,4 +73,18 @@ function triggerToast(title, message) {
     document.querySelector('#toast-title').textContent = title;
     document.querySelector('#toast-text').textContent = message;
     bsAlert.show();//show it
+}
+
+
+
+function showAutomata() {
+  showElement_('board'); hideElement('grammar');hideElement('regexp');
+}
+
+function showGrammar() {
+  showElement_('grammar'); hideElement('board');hideElement('regexp');
+}
+
+function showRegex() {
+  showElement_('regexp'); hideElement('board');hideElement('grammar');
 }

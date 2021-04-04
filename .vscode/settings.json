@@ -1,4 +1,4 @@
 {
-    "editor.formatOnSave": true,
-    "html.format.endWithNewline": true
+    "html.format.endWithNewline": true,
+    "liveServer.settings.port": 5501
 }

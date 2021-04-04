@@ -50,15 +50,14 @@
           <div id="automata-menu" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="clearAll()">Limpar</a>
           </div>
-          <hr>
 
-          <!-- todo: trocar pra uma segunda aba do ACE, colocar valor inicial do editor com o exemplo padrão tb -->
-          <textarea id="second-editor" placeholder=""></textarea>
+          <hr>
+          <h5 style="color: white;text-align: center">Operações:</h5 >
           <div id="union-button" style="display: block">
-            <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(union)">U</a>
+            <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(union)">União (U)</a>
           </div>
           <div id="union-button" style="display: block">
-            <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(intersection)">∩</a>
+            <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(intersection)">Interseção (∩)</a>
           </div>
 
           <hr>
@@ -109,6 +108,7 @@
     <div id="edit-json" class="col-4" style="height: 98vh;">
       <!-- Editor placeholder -->
       <div id="editor" style="height: 100%;display: block;" oninput="draw()"></div>
+      <div id="editor2" style="height: 100%;display: block;" oninput="draw()"></div>
 
       <!-- Initializing editor -->
       <script>
@@ -116,6 +116,11 @@
         editor.setTheme("ace/theme/tomorrow_night");
         editor.session.setMode("ace/mode/json");
         editor.session.setValue((('🙃'.repeat(56)) + '\n').repeat(100));
+
+        var editor2 = ace.edit("editor2");
+        editor2.setTheme("ace/theme/tomorrow_night");
+        editor2.session.setMode("ace/mode/json");
+        editor2.session.setValue((('🙃'.repeat(56)) + '\n').repeat(100));
       </script>
     </div>
 

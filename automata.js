@@ -99,7 +99,3 @@ function automataToGrammar(automata) {
   // console.log(grammar);
 
 }
-
-function automataToGrammar() {
-
-}

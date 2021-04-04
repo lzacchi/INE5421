@@ -13,21 +13,17 @@ async function loadSampleGrammar() {
   const sample = await fetch(url)
     .then(response => response.json())
   loadFile(sample);
-  grammarToAutomata(sample);
 }
 
-function grammarToAutomata(grammar) {
-  var terminal = grammar['terminal'];
+function grammarToAutomata() {
+  var grammar = activeJson();
   var nonTerminal = grammar['nonTerminal'];
   var productionRules = grammar['productionRules'];
 
-
-  // var final_states;
   var transistions = [];
 
   nonTerminal.push("Final");
 
-  // console.log(productionRules);
 
   // transitions
   for (const rule in productionRules) {
@@ -54,7 +50,6 @@ function grammarToAutomata(grammar) {
 
   }
 
-  // console.log(transistions);
 
   var automata = {
     'type': "finite-automata",
@@ -64,4 +59,6 @@ function grammarToAutomata(grammar) {
     'transistions': transistions
   };
 
+  setEditorText(automata);
+  drawFiniteAutomata();
 }

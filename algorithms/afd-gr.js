@@ -38,4 +38,5 @@ function grammarToAutomata() {
 
   setEditorText(automata);
   drawFiniteAutomata();
+  showAutomata();
 }

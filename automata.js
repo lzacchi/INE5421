@@ -72,30 +72,3 @@ function applyBinaryOperation(operation) {
   }
   operation(json, inputJSON);
 }
-
-function automataToGrammar(automata) {
-
-  var grammar = {
-    "type": "regular-grammar",
-    "terminal": automata['states'],
-    "nonTerminal": [],
-    "productionRules": []
-  }
-
-
-  for (const transition in automata['transitions']) {
-    grammar['nonTerminal'].push(automata['transitions'][transition]['symbol']);
-
-  }
-
-  for (const terminal in grammar['terminal']) {
-    console.log(grammar['terminal'][terminal]);
-  }
-
-  grammar['nonTerminal'] = [...new Set(grammar['nonTerminal'])];
-
-
-
-  // console.log(grammar);
-
-}

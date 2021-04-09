@@ -1,0 +1,41 @@
+{
+    "type": "finite-automata",
+    "start": "q0",
+    "final": [
+        "q4"
+    ],
+    "states": [
+        "q0",
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+    ],
+    "transitions": [
+        {
+            "from": "q0",
+            "to": "q1",
+            "symbol": "&"
+        },
+        {
+            "from": "q0",
+            "to": "q2",
+            "symbol": "&"
+        },
+        {
+            "from": "q1",
+            "to": "q3",
+            "symbol": "0"
+        },
+        {
+            "from": "q2",
+            "to": "q3",
+            "symbol": "1"
+        },
+        {
+            "from": "q3",
+            "to": "q4",
+            "symbol": "1"
+        }
+    ]
+}

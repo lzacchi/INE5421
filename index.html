@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Trabalho de Formais 🙃</title>
+  <title>Trabalho de Formais</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
@@ -24,7 +24,7 @@
     <!-- Side navigation -->
     <div class="col-2" style="z-index: 999999;">
       <div id="menu-wrapper" class="sidenav menu">
-        <a style="color: white; font-size: 25px;"><strong>Trabalho de Formais 🙃</strong></a>
+        <a style="color: white; font-size: 25px;"><strong>Trabalho de Formais</strong></a>
         <hr>
         <div id="main-menu">
           <!-- Submenu de categoria -->
@@ -52,14 +52,19 @@
           </div>
 
           <hr>
-          <h5 style="color: white;text-align: center">Operações:</h5 >
+          <h5 style="color: white;text-align: center">Operações:</h5>
           <div id="union-button" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(union)">União (U)</a>
           </div>
           <div id="union-button" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(intersection)">Interseção (∩)</a>
           </div>
-
+          <div id="union-button" style="display: block">
+            <a class="btn btn-secondary" href="#" onclick="determinizeNFA()">AFND -> AFD</a>
+          </div>
+          <div id="union-button" style="display: block">
+            <a class="btn btn-secondary" href="#" onclick="minimizeDFA()">Minimizar</a>
+          </div>
           <hr>
         </div>
       </div>
@@ -92,13 +97,9 @@
             <label for="regexp-custom">Sua RegExp:</label><br>
             <textarea onchange="runRegExp()" id="regexp-custom" cols="30" rows="10"></textarea>
           </li>
-          <li>
-            <label for="regexp-input">Entrada:</label><br>
-            <textarea onchange="runRegExp()" id="regexp-input" cols="30" rows="10"></textarea>
-          </li>
           <hr>
           <li>
-            <label for="regexp-result">Resultados:</label>Em breve 🙃<br>
+            <label for="regexp-result">Resultados:</label>Em breve<br>
             <p id="regexp-result"></p>
           </li>
         </ul>
@@ -115,12 +116,12 @@
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/tomorrow_night");
         editor.session.setMode("ace/mode/json");
-        editor.session.setValue((('🙃'.repeat(56)) + '\n').repeat(100));
+        editor.session.setValue("Initialazing...");
 
         var editor2 = ace.edit("editor2");
         editor2.setTheme("ace/theme/tomorrow_night");
         editor2.session.setMode("ace/mode/json");
-        editor2.session.setValue((('🙃'.repeat(56)) + '\n').repeat(100));
+        editor2.session.setValue("Initialazing...");
       </script>
     </div>
 
@@ -138,6 +139,7 @@
   <script src="actions.js"></script>
   <script src="regexp.js"></script>
 
+  <script src="algorithms/nfa.js"></script>
   <script src="algorithms/union.js"></script>
   <script src="algorithms/intersection.js"></script>
 </body>

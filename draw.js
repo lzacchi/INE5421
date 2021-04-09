@@ -19,16 +19,16 @@ function drawFiniteAutomata() {
     board.model = new go.GraphLinksModel(
         states.map(state => {
             let label = "\n\n ";
-            let color = "lightsteelblue"
+            let color = "lightsteelblue";
             if (state === start && final.includes(state)) {
                 label = "\n\n-> F:    ";
-                color = "skyblue";
+                color = "lightcoral";
             } else if (state === start) {
                 label = "\n\n->     ";
-                color = "powderblue";
+                color = "lightcyan";
             } else if (final.includes(state)) {
                 label = "\n\nF:     ";
-                color = "skyblue";
+                color = "lightcoral";
             }
 
             return { key: state, color, label };

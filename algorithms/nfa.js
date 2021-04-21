@@ -1,12 +1,12 @@
 function epsilonTransitions(state, transitions) {
   // filtering epsilon transitions from 'state'
   const stateTransitions = transitions.filter(t => t.from === state && t.symbol === "&");
-  
+
   if (stateTransitions.length > 0) { // if there is at least one then recall this function for each state
     let firstETrs = [...new Set(stateTransitions.map(t => t.to).sort())];
     let nextETrs = firstETrs.map(s => epsilonTransitions(s, transitions)).reduce((p,c) => p.concat(c));
     return firstETrs.concat(nextETrs);
-  } 
+  }
   return [];
 }
 
@@ -14,8 +14,7 @@ function checkEpsilonTransition(transitions) {
   return transitions.some(el => el.symbol === "&");
 }
 
-function determinizeNFA() {
-  const json = activeJSON();
+function determinizeNFA(json) {
   const hasEpsilon = checkEpsilonTransition(json.transitions);
   const alphabet = [... new Set(json.transitions.map(a => a.symbol))].sort();
 
@@ -86,7 +85,7 @@ function removeUnreachableStates(json) {
       pendingStates = [...new Set(pendingStates)].sort(); // removing duplicates
       removeElement(st, pendingStates);  // removing current state from pending list
 
-      
+
     }
   // removing unreachable states
   let unreachableStates = json.states.filter(state => !checkedStates.includes(state));
@@ -97,38 +96,6 @@ function removeUnreachableStates(json) {
     }
   })
   loadFile(json);
-}
-
-// REMOVE BEFORE COMMIT (deprecated)
-function removeUnreachableStates2(json) {
-  let un_states = [];
-  for (const st of json.states) {
-    if (st !== json.start) {
-      let sts = json.transitions.filter(e => e.to === st && e.from !== st);
-      if (sts.length < 1) {
-        un_states.push(st);
-      }
-    }
-  }
-  // removing transitions from unreachable states
-  for (const st of un_states) {
-    let sts = json.transitions.filter(e => e.from === st);
-    if (sts.length > 0) {
-      sts.map(t => {
-      const here = json.transitions.indexOf(t);
-      if (here > -1) {
-        json.transitions.splice(here, 1);
-      }
-      });
-    }
-  }
-  // removing state from list of states
-  un_states.map( s => {
-    const here = json.states.indexOf(s);
-    if (here > -1) {
-      json.states.splice(here, 1);
-    }
-    });
 }
 
 function withoutEpsilon(json, alphabet) {
@@ -232,14 +199,14 @@ function withoutEpsilonAGORAVAI(json, alphabet) {
     "final": [],
     "states": [],
     "transitions": []
-  }; 
+  };
 
   prepareNFA(json, alphabet);  // Prepare NFA adding states like [q1,...,qN] and removing N transitions
- 
+
   let pending_new_states = [];  // list of new states to include in new_dfa
-  
+
   pending_new_states.push(json.start);  // start with the start state of NFA
-  
+
   while(pending_new_states.length > 0) {
     let qi = pending_new_states.pop();
     if (qi.includes(",")) { // dealing with 'multistate' (?)
@@ -280,7 +247,7 @@ function withoutEpsilonAGORAVAI(json, alphabet) {
             pending_new_states.push(new_state.sort().join(","));
           }
           let new_transition = {"from": qi.sort().join(","), "to":new_state.join(","), "symbol": letter};
-          
+
           if (new_dfa.transitions.filter(t => t.from === qi.sort().join(",") && t.to === new_state.join(",") && t.symbol === letter).length < 1) { // verifying if already has this transition
             new_dfa.transitions.push(new_transition); // adding new transition
           }
@@ -339,15 +306,15 @@ function withEpsilon(json, alphabet) {
     "final": [],
     "states": [],
     "transitions": []
-  }; 
+  };
   // ISSO VAI JUNTAR AS TRANSIÇÃO EPSILON NÉ? (talvez tenha que adaptar )
   prepareNFA(json, alphabet);  // Prepare NFA adding states like [q1,...,qN] and removing N transitions
- 
+
   let pending_new_states = [];  // list of new states to include in new_dfa
-  
+
   // could use 'if' to avoid double code
   pending_new_states.push(new_start);  // start with the start state of NFA
-  
+
   while(pending_new_states.length > 0) {
     let qi = pending_new_states.pop();
     if (qi.includes(",")) { // dealing with 'multistate' (?)
@@ -357,7 +324,7 @@ function withEpsilon(json, alphabet) {
     // Calculate transitions from qi state for each transition symbol
     for (const letter of alphabet) {
       if (letter === "&") {continue;} // ignoring epsilon transitions
-      
+
       if (typeof qi === "string") { // case simple state
         let new_trs = json.transitions.filter(t => t.from === qi && t.symbol === letter);
         if (new_trs.length > 0) {
@@ -367,7 +334,7 @@ function withEpsilon(json, alphabet) {
           let new_state = [];
           recursiveAddState(new_trs, new_state);
           new_state = [...new Set(new_state)].sort().join(",");
-          
+
           // verify if new state exists else add to new states list
           if (!new_dfa.states.includes(new_state) && !pending_new_states.includes(new_state)) {
             pending_new_states.push(new_state);
@@ -393,10 +360,10 @@ function withEpsilon(json, alphabet) {
         // checking if has at least one transition from 'qi' by 'letter'
         if (new_trs.length > 0) {
           let new_state = [];
-          
+
           recursiveAddState(new_trs.map(t => t.to), new_state);
           new_state = [...new Set(new_state.map(t => epsilonTable[t]))].sort().join(",");
-          
+
 
           // let new_state = [...new Set(new_trs.map(t => t.to).map(e => e.split(",")).reduce(function (prev, curr) {return prev.concat(curr)}))].sort();
           // verify if new state exists else add to new states list
@@ -404,7 +371,7 @@ function withEpsilon(json, alphabet) {
             pending_new_states.push(new_state);
           }
           let new_transition = {"from": qi.sort().join(","), "to":new_state, "symbol": letter};
-          
+
           if (new_dfa.transitions.filter(t => t.from === qi.sort().join(",") && t.to === new_state && t.symbol === letter).length < 1) { // verifying if already has this transition
             new_dfa.transitions.push(new_transition); // adding new transition
           }
@@ -435,15 +402,14 @@ function withEpsilon(json, alphabet) {
   loadFile(new_dfa, false);
 }
 
-function minimizeDFA() {
-  let json = activeJSON();
+function minimizeDFA(json) {
   const alphabet = [... new Set(json.transitions.map(a => a.symbol))].sort();
 
   // checking if it is a NFA
   const isNFA = checkEpsilonTransition(json.transitions);
 
   if (isNFA) {
-    determinizeNFA(); // then transform NFA to DFA
+    determinizeNFA(json); // then transform NFA to DFA
   }
   // the function name say clearly what it does
   removeUnreachableStates(json);
@@ -454,7 +420,7 @@ function minimizeDFA() {
   groupStates.push(json.transitions.filter(t => json.final.includes(t.from)));
   let elseGroup = json.transitions.filter(t => !json.final.includes(t.from));
   for (const t of elseGroup) {
-      
+
   }
 
 

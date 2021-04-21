@@ -64,7 +64,14 @@ async function drawGrammar() {
 }
 
 function drawExpression() {
-    // todo
+    json = activeJSON();
+    let regexInput = "";
+    Object.keys(json.tokens).map(k => {
+        regexInput += k+" => "+json.tokens[k]+"\n";
+    });
+    document.querySelector('#regexp-input').value = regexInput;
+    loadSampleRegexp();
+
 }
 
 function triggerToast(title, message) {
@@ -78,13 +85,18 @@ function triggerToast(title, message) {
 
 
 function showAutomata() {
-  showElement_('board'); hideElement('grammar');hideElement('regexp');
+  showElement_('board');hideElement("syntax-analysis"); hideElement('grammar');hideElement('regexp');
 }
 
 function showGrammar() {
-  showElement_('grammar'); hideElement('board');hideElement('regexp');
+  showElement_('grammar');hideElement("syntax-analysis"); hideElement('board');hideElement('regexp');
 }
 
 function showRegex() {
-  showElement_('regexp'); hideElement('board');hideElement('grammar');
+  showElement_('regexp');hideElement("syntax-analysis"); hideElement('board');hideElement('grammar');
+}
+function showSyntaxAnalysis() {
+  toggleEditor();
+  toggleEditor("editor2");
+  showElement_("syntax-analysis");hideElement('regexp'); hideElement('board');hideElement('grammar');
 }

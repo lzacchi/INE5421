@@ -34,8 +34,8 @@ function setEditorText(value, secondEditor = false) {
     }
 }
 
-function toggleEditor() {
-    const editorState = toggleDiv('editor');
+function toggleEditor(editorName="editor") {
+    const editorState = toggleDiv(editorName);
     let editorButton = document.querySelector("#editor-button");
     switch (editorState) {
         case "":

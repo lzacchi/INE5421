@@ -36,6 +36,8 @@
             Regulares</a>
           <a href="#expressoes-regulares"
             onclick="showRegex()">Expressões Regulares</a>
+          <a href="#analise-sintatica"
+          onclick="showSyntaxAnalysis()">Análise Sintática</a>
           <hr>
           <!-- Submenu de ações -->
           <div id="actions-menu">
@@ -56,10 +58,19 @@
           <div id="union-button" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(union)">União (U)</a>
           </div>
-          <div id="union-button" style="display: block">
+          <div id="intersection-button" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(intersection)">Interseção (∩)</a>
           </div>
-          <div id="union-button" style="display: block">
+          <div id="concat-button" style="display: block">
+            <a class="btn btn-secondary" href="#" onclick="applyBinaryOperation(concatenation)">Concatenação</a>
+          </div>
+          <div id="kleene-button" style="display: block">
+            <a class="btn btn-secondary" href="#" onclick="closure(activeJSON(), true)">* Fecho</a>
+          </div>
+          <div id="robson-button" style="display: block">
+            <a class="btn btn-secondary" href="#" onclick="closure(activeJSON(), false)">+ Fecho</a>
+          </div>
+          <div id="verify-button" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="verify()">Verificar sentença</a>
           </div>
 
@@ -71,10 +82,10 @@
             <a class="btn btn-secondary" href="#" onclick="automataToGrammar()">Autômato -> Gramática</a>
           </div>
           <div id="" style="display: block">
-            <a class="btn btn-secondary" href="#" onclick="determinizeNFA()">AFND -> AFD</a>
+            <a class="btn btn-secondary" href="#" onclick="determinizeNFA(activeJSON())">AFND -> AFD</a>
           </div>
           <div id="union-button" style="display: block">
-            <a class="btn btn-secondary" href="#" onclick="minimizeDFA()">Minimizar</a>
+            <a class="btn btn-secondary" href="#" onclick="minimizeDFA(activeJSON())">Minimizar</a>
           </div>
           <hr>
         </div>
@@ -102,24 +113,24 @@
       <div id="grammar" style="height:100%"></div>
 
       <!-- Regular Expression -->
-      <div id='regexp' style="display:none">
-        <ul class="list-unstyled">
-          <li>
-            <label for="regexp-custom">Sua RegExp:</label><br>
-            <textarea onchange="runRegExp()" id="regexp-custom" cols="30" rows="10"></textarea>
-          </li>
-          <hr>
-          <li>
-            <label for="regexp-result">Resultados:</label>Em breve<br>
-            <p id="regexp-result"></p>
-          </li>
-        </ul>
+      <div style="margin-left: 7%;" id='regexp' style="display:none">
+        <textarea id="regexp-input" name="Suas expressões regulares"  cols="30" rows="10">exemplo = a(a+b)*c</textarea>
+        <br><button onclick="saveRegExp()">Salvar</button>
+      </div>
+
+      <!-- Syntax Analysis-->
+      <div id="analysis" style="margin-left: 7%; display: none">
+        <textarea id="pseudocode-input" name="Seu pseudo-código"  cols="30" rows="10">int a = 10;</textarea>
+        <br>
+        <button id="syntax-analysis" onclick="analysePseudoCode">Analisar pseudo-código</button>
+
       </div>
 
     </div>
     <div id="edit-json" class="col-4" style="height: 98vh;">
       <!-- Editor placeholder -->
       <div id="editor" style="height: 100%;display: block;" oninput="draw()"></div>
+      <hr>
       <div id="editor2" style="height: 100%;display: block;" oninput="draw()"></div>
 
       <!-- Initializing editor -->
@@ -143,18 +154,22 @@
     <p>© Artur Barichello, Lucas Verdade & Lucas Zacchi. This software is not intended for educational uses</p>
   </div>
 
-  <script src="files.js"></script>
-  <script src="draw.js"></script>
-  <script src="automata.js"></script>
-  <script src="grammar.js"></script>
   <script src="actions.js"></script>
+  <script src="automata.js"></script>
+  <script src="draw.js"></script>
+  <script src="files.js"></script>
+  <script src="grammar.js"></script>
   <script src="regexp.js"></script>
 
+  <script src="algorithms/afd-gr.js"></script>
+  <script src="algorithms/er-afd.js"></script>
+  <script src="algorithms/closure.js"></script>
+  <script src="algorithms/concat.js"></script>
+  <script src="algorithms/intersection.js"></script>
   <script src="algorithms/nfa.js"></script>
   <script src="algorithms/union.js"></script>
-  <script src="algorithms/intersection.js"></script>
   <script src="algorithms/verify.js"></script>
-  <script src="algorithms/afd-gr.js"></script>
+  <script src="algorithms/syntax-analysis.js"></script>
 </body>
 
 </html>

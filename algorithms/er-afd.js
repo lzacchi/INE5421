@@ -53,7 +53,7 @@ function createBasicAutomata(symbol) {
   return {
     "type": "finite-automata",
     "start": states[0],
-    "final": states[1],
+    "final": [states[1]],
     "states": states,
     "transitions": [
       {
@@ -66,35 +66,47 @@ function createBasicAutomata(symbol) {
 }
 
 function removeOperationSymbols(str) {
-  for (unarySymbol in operations.unary) {
-    str = str.replace(unarySymbol, "");
-  }
-  for (binarySymbol in operations.binary) {
-    str = str.replace(binarySymbol, "");
-  }
-  return str;
+  return str.replaceAll(/\||\*|\.|\+|\(|\)/g, "");
 }
 
 function selectOperation(char) {
   switch (char) {
     case ".": return concatenation;
     case "|": return union;
+    case "+": return closurePlus;
   }
 }
 
-function convertRegexToDFA(regexStr) {
+function unaryOperation(char) {
+  if (char in Object.keys(operations.unary)) {
+    return true;
+  }
+  if (char in Object.keys(operations.binary)) {
+    return false;
+  }
+  return null;
+}
+
+function removeAlphanumeric(str) {
+  return str.replaceAll(/[A-z0-9]|\(|\)/g, "");
+}
+
+function convertRegexToDFA(str) {
+  const regexStr = reverseString(str);
   const states = removeOperationSymbols(regexStr).split("");
   const automatas = states.map(s => createBasicAutomata(s));
-  console.log(automatas);
-
-  const operations = regexStr.replaceAll(/[A-z]/g, "").split(""); // remove all alphanumeric
+  const operationSymbols = removeAlphanumeric(regexStr).split(""); // remove all alphanumeric
 
   var operatedAutomata = automatas.pop();
-  while (operations.length) {
-    const op = operations.pop();
+  while (operationSymbols.length) {
+    const op = operationSymbols.pop();
     const fn = selectOperation(op);
-    const nextAutomata = automatas.pop();
-    fn(operatedAutomata, nextAutomata);
+    if (unaryOperation(op)) {
+      operatedAutomata = fn(operatedAutomata);
+    } else {
+      const nextAutomata = automatas.pop();
+      operatedAutomata = fn(operatedAutomata, nextAutomata);
+    }
   }
   console.log(operatedAutomata);
 }

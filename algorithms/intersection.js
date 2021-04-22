@@ -1,21 +1,10 @@
 function intersection(automataA, automataB) {
-  complement(automataA);
-  complement(automataB);
-  const u = union(automataA, automataB);
-  complement(u);
+  const a = complement(automataA);
+  const b = complement(automataB);
+  const result = union(a, b);
 
-  setEditorText(u);
+  // const result = complement(unionAutomata);
+  setEditorText(result);
   drawFiniteAutomata();
-}
-
-function complement(automata) {
-  const newFinal = [];
-  for (state of automata.states) {
-    if (!automata.final.includes(state)) {
-      newFinal.push(state);
-    } else {
-      continue;
-    }
-  }
-  automata.final = newFinal;
+  return result;
 }

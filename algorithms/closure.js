@@ -1,18 +1,28 @@
+function closureStar(automata) {
+  closure(automata, true);
+}
+
+function closurePlus(automata) {
+  closure(automata, false);
+}
+
 function closure(automata, star = true) {
   const ogStart = [automata.start];
   const ogFinal = automata.final;
 
+  const rand = getRandomInt(100000);
+  const newStartName = `q0-new-${rand}`;
   const newAutomata = {
     "type": "finite-automata",
-    "start": "q0-new",
-    "final": star ? automata.final.concat("q0-new") : automata.final,
+    "start": newStartName,
+    "final": star ? automata.final.concat(newStartName) : automata.final,
 
-    "states": ["q0-new"].concat(automata.states),
+    "states": [newStartName].concat(automata.states),
     "transitions": automata.transitions.concat(
 
       ogStart.map((startState) => {
         return {
-          "from": "q0-new",
+          "from": newStartName,
           "to": startState,
           "symbol": "&"
         };
@@ -21,7 +31,7 @@ function closure(automata, star = true) {
       ogFinal.map((finalState) => {
         return {
           "from": finalState,
-          "to": "q0-new",
+          "to": newStartName,
           "symbol": "&",
         };
       })

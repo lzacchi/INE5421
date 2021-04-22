@@ -3,7 +3,7 @@ function saveRegExp() {
             "type": "regular-expression",
             "tokens": {}
         }
-    regexpText = document.querySelector('#regexp-input').value;
+    let regexpText = document.querySelector('#regexp-input').value;
     let regexps = regexpText.split("\n").map(s => s.split("=>"));
     regexps.map(r => r[0] = r[0].replace(" ","").trim()); // removing spaces from token name
     regexps.map(r => regexpTemplate.tokens[r[0]] = r[1].replace(" ","").trim());

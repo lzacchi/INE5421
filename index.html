@@ -37,7 +37,7 @@
           <a href="#expressoes-regulares"
             onclick="showRegex()">Expressões Regulares</a>
           <a href="#analise-sintatica"
-          onclick="showSyntaxAnalysis()">Análise Sintática</a>
+          onclick="showSyntaxAnalysis(); ">Análise Sintática</a>
           <hr>
           <!-- Submenu de ações -->
           <div id="actions-menu">
@@ -71,7 +71,10 @@
             <a class="btn btn-secondary" href="#" onclick="closure(activeJSON(), false)">+ Fecho</a>
           </div>
           <div id="verify-button" style="display: block">
-            <a class="btn btn-secondary" href="#" onclick="verify()">Verificar sentença</a>
+            <a class="btn btn-secondary" href="#" onclick="verifyEditorAutomata()">Verificar sentença</a>
+          </div>
+          <div id="verify-button" style="display: block">
+            <a class="btn btn-secondary" href="#" onclick="convertRegexToDFA()">DEBUG: regexToDFA</a>
           </div>
 
           <h5 style="color: white;text-align: center">Converter:</h5>
@@ -114,15 +117,30 @@
 
       <!-- Regular Expression -->
       <div style="margin-left: 7%;" id='regexp' style="display:none">
-        <textarea id="regexp-input" name="Suas expressões regulares"  cols="30" rows="10">exemplo = a(a+b)*c</textarea>
+        <textarea id="regexp-input" name="Suas expressões regulares"  cols="30" rows="10">exemplo => a(a+b)*c</textarea>
         <br><button onclick="saveRegExp()">Salvar</button>
       </div>
 
       <!-- Syntax Analysis-->
-      <div id="analysis" style="margin-left: 7%; display: none">
-        <textarea id="pseudocode-input" name="Seu pseudo-código"  cols="30" rows="10">int a = 10;</textarea>
+      <div id="syntax-analysis" style="margin-left: 7%; display: none">
+        <textarea id="pseudocode-input" name="Seu pseudo-código"  cols="30" rows="10"></textarea>
         <br>
-        <button id="syntax-analysis" onclick="analysePseudoCode">Analisar pseudo-código</button>
+        <button id="syntax-analysis" onclick="analysePseudoCode()">Analisar pseudo-código</button>
+        <br>
+        <!-- <div id="tokens-result">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Lexeme</th>
+                <th scope="col">Token</th>
+              </tr>
+            </thead>
+            <tbody>
+              <th scope="row"></th>
+            </tbody>
+          </table>
+        </div>  -->
+        </div>
 
       </div>
 
@@ -161,6 +179,7 @@
   <script src="files.js"></script>
   <script src="grammar.js"></script>
   <script src="regexp.js"></script>
+  <script src="syntax-analysis.js"></script>
 
   <script src="algorithms/afd-gr.js"></script>
   <script src="algorithms/closure.js"></script>
@@ -171,7 +190,6 @@
   <script src="algorithms/nfa.js"></script>
   <script src="algorithms/union.js"></script>
   <script src="algorithms/verify.js"></script>
-  <script src="algorithms/syntax-analysis.js"></script>
 </body>
 
 </html>

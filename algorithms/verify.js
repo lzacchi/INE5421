@@ -1,13 +1,7 @@
-function verify() {
-  const json = activeJSON();
-  const editorText = editor2.getValue();
-  if (json.type !== "finite-automata") {
-    triggerToast("Erro", "Operação não suportada para os tipos de linguagem selecionados")
-    return;
-  }
-
+// generic verification function
+function verify(json, testedString) {
   var state = json.start;
-  for (const char of editorText) {
+  for (const char of testedString) {
     const transitionsFromThisState = json.transitions.filter(t => t.from === state);
     const nextState = transitionsFromThisState.filter(t => t.symbol === char);
     if (!nextState) {
@@ -15,9 +9,21 @@ function verify() {
     }
     state = nextState[0].to;
   }
-  const valid = json.final.includes(state);
+  return json.final.includes(state);
+}
+
+// verify the current automata in display
+function verifyEditorAutomata() {
+  const json = activeJSON();
+  const testedString = editor2.getValue();
+  if (json.type !== "finite-automata") {
+    triggerToast("Erro", "Operação não suportada para os tipos de linguagem selecionados")
+    return;
+  }
+
+  const valid = verify(json, testedString);
   const title = valid ? "Sucesso" : "Erro";
   const neg = !valid ? "não " : "";
-  const msg = `O autômato ${neg}reconhece a String`;
+  const msg = `O autômato ${neg} reconhece a String`;
   triggerToast(title, msg);
 }

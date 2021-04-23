@@ -1,5 +1,5 @@
-// const DEBUG = true;
-const DEBUG = false;
+const DEBUG = true;
+// const DEBUG = false;
 
 function init() {
     boardInit();
@@ -59,10 +59,12 @@ function clearAll() {
     switch (activeJSON().type) {
         case "finite-automata":
             clearAutomata();
+            break;
         case "regular-grammar":
             clearGrammar();
+            break;
         case "regular-expression":
-        // todo
+            break;
     }
 }
 

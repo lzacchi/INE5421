@@ -26,7 +26,7 @@ function determinizeNFA(json) {
 }
 
 function recursiveAddState(states, list) {
-  for (q of states) {
+  for (let q of states) {
     if (q.includes(",")) {
       recursiveAddState(q.split(","), list);
     } else {
@@ -275,6 +275,9 @@ function withoutEpsilonAGORAVAI(json, alphabet) {
       }
     }
   });
+  // checking huge names
+
+  // load file to board
   loadFile(new_dfa, false);
 }
 
@@ -399,6 +402,38 @@ function withEpsilon(json, alphabet) {
       }
     }
   });
+  // removing huge name states
+  const hugeNameStates = new_dfa.states.filter(s => s.length > 40);
+  hugeNameStates.map(
+    state => {
+        // troca por um nome aleatório aí
+        const randId = getRandomInt(666);
+        const newStateRand = `newState-${randId}`;
+
+        // refactoring
+        new_dfa.transitions.map(t => {
+          if (t.from === state) {
+            t.from = newStateRand;
+          }
+          if (t.to === state) {
+            t.to = newStateRand;
+          }
+        });
+
+        // removing old name and adding new
+        removeElement(state, new_dfa.final);
+        new_dfa.final.push(newStateRand);
+
+        // removing old name and adding new
+        removeElement(state, new_dfa.states);
+        new_dfa.states.push(newStateRand);
+
+
+
+    }
+  );
+
+  // loading and drawing the result
   loadFile(new_dfa, false);
 }
 

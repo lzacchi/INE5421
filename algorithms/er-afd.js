@@ -9,18 +9,12 @@ const operations = {
   }
 }
 
-// * ->
-// + ->
-function remapSymbols() {
-
-}
-
 function insertStringAt(str, insertString, position) {
   return str.slice(0, position) + insertString + str.slice(pos);
 }
 
 function addOmittedConcatenation(regexStr) {
-  for (char of regexStr) {
+  for (let char of regexStr) {
     const charIndex = regexStr.indexOf(char);
     const nextCharIndex = charIndex+1;
     const alphanumericRegex = /[A-z]/;
@@ -37,16 +31,6 @@ function formatRegexString(regexStr) {
   regexStr = addOmittedConcatenation(regexStr);
   return regexStr;
 }
-
-// todo: support parenthesis
-// function computeParenthesis(regexStr) {
-//   var group = regexStr.match(/\(.+\).{1}/)[0];
-//   if (group) {
-//   } else {
-//     group = regexStr;
-//   }
-//   return group;
-// }
 
 function createBasicAutomata(symbol) {
   const states = [`start-${symbol}`,`final-${symbol}` ];
@@ -78,35 +62,47 @@ function selectOperation(char) {
 }
 
 function unaryOperation(char) {
-  if (char in Object.keys(operations.unary)) {
-    return true;
-  }
-  if (char in Object.keys(operations.binary)) {
-    return false;
-  }
-  return null;
+  return Object.keys(operations.unary).includes(char);
 }
 
-function removeAlphanumeric(str) {
-  return str.replaceAll(/[A-z0-9]|\(|\)/g, "");
+function binaryOperation(char) {
+  return Object.keys(operations.binary).includes(char);
+}
+
+function getOperationSymbols(str) {
+  let ret = [];
+  for (const char of str) {
+    if (unaryOperation(char) || binaryOperation(char)) {
+      ret.push(char);
+    }
+  }
+  return ret.join("");
+}
+
+function popFront(arr) {
+  const first = arr[0];
+  arr.shift();
+  return first;
 }
 
 function convertRegexToDFA(str) {
-  const regexStr = reverseString(str);
-  const states = removeOperationSymbols(regexStr).split("");
+  const states = removeOperationSymbols(str).split("");
   const automatas = states.map(s => createBasicAutomata(s));
-  const operationSymbols = removeAlphanumeric(regexStr).split(""); // remove all alphanumeric
+  const operationSymbols = getOperationSymbols(str).split(""); // remove all alphanumeric
 
-  var operatedAutomata = automatas.pop();
+  var operatedAutomata = popFront(automatas);
   while (operationSymbols.length) {
-    const op = operationSymbols.pop();
+    const op = popFront(operationSymbols);
     const fn = selectOperation(op);
     if (unaryOperation(op)) {
       operatedAutomata = fn(operatedAutomata);
-    } else {
-      const nextAutomata = automatas.pop();
+    } else if (binaryOperation(op)) {
+      const nextAutomata = popFront(automatas);
       operatedAutomata = fn(operatedAutomata, nextAutomata);
+    } else {
+      console.log('skipping unknown symbol: ' + op);
     }
   }
   console.log(operatedAutomata);
+  return operatedAutomata;
 }

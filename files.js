@@ -20,7 +20,10 @@ function loadFile(json, secondEditor = false) {
       drawGrammar();
       break;
     case "regular-expression":
-      // loadRegularExpression() // TODO
+      // loadRegularExpression();
+      break;
+    case "pseudocode":
+      syntaxAnalysisInit();
       break;
   }
 }

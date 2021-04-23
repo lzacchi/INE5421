@@ -7,7 +7,11 @@ function verify(json, testedString) {
     if (!nextState) {
       break;
     }
-    state = nextState[0].to;
+    if (nextState[0]) {
+      state = nextState[0].to;
+    } else {
+      break;
+    }
   }
   return json.final.includes(state);
 }

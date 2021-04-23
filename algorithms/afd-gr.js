@@ -68,8 +68,6 @@ function automataToGrammar() {
   }
 
   grammar['terminal'] = [...new Set(grammar.terminal)];
-  // console.log(grammar);
-
   setEditorText(grammar);
   drawGrammar();
   showGrammar();

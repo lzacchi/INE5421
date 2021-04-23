@@ -117,7 +117,6 @@ function withoutEpsilon(json, alphabet) {
         newTransition.map(t => {const here = json.transitions.indexOf(t); if (here > -1){json.transitions.splice(here, 1);} });
 
         while (pending_states.length > 0) {
-          // console.log(pending_states);
           let _state = pending_states.pop().split(",").sort();
           let new_trs = [];
           for (let st_ of _state) {
@@ -139,13 +138,7 @@ function withoutEpsilon(json, alphabet) {
           if (!finished_states.includes(_state.join(","))) {
             finished_states.push(_state.join(","));
           }
-          // console.log(finished_states);
-          // console.log(pending_states);
         }
-      }
-      //  DEBUG
-      if (st === "q1,q2" && sym === "1") {
-        console.log("AQUI BROTHER DEBUGA AQUI");
       }
     }
 
@@ -449,14 +442,14 @@ function minimizeDFA(json) {
   // the function name say clearly what it does
   removeUnreachableStates(json);
 
-  // do not know what to do
-  let groupStates = [];
-  // pares de estados
-  groupStates.push(json.transitions.filter(t => json.final.includes(t.from)));
-  let elseGroup = json.transitions.filter(t => !json.final.includes(t.from));
-  for (const t of elseGroup) {
+  // // do not know what to do
+  // let groupStates = [];
+  // // pares de estados
+  // groupStates.push(json.transitions.filter(t => json.final.includes(t.from)));
+  // let elseGroup = json.transitions.filter(t => !json.final.includes(t.from));
+  // for (const t of elseGroup) {
 
-  }
-
+  // }
+  return json
 
 }

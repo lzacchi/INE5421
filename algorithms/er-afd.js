@@ -10,7 +10,7 @@ const operations = {
 }
 
 function insertStringAt(str, insertString, position) {
-  return str.slice(0, position) + insertString + str.slice(pos);
+  return str.slice(0, position) + insertString + str.slice(position);
 }
 
 function addOmittedConcatenation(regexStr) {
@@ -18,7 +18,7 @@ function addOmittedConcatenation(regexStr) {
     const charIndex = regexStr.indexOf(char);
     const nextCharIndex = charIndex+1;
     const alphanumericRegex = /[A-z]/;
-    if (char.match(alphanumericRegex) && regexStr.at(nextCharIndex).match(alphanumericRegex)) {
+    if (char.match(alphanumericRegex) && regexStr[nextCharIndex] && regexStr[nextCharIndex].match(alphanumericRegex)) {
       insertStringAt(regexStr, ".", nextCharIndex);
     }
   }
@@ -86,11 +86,15 @@ function popFront(arr) {
 }
 
 function convertRegexToDFA(str) {
-  const states = removeOperationSymbols(str).split("");
-  const automatas = states.map(s => createBasicAutomata(s));
-  const operationSymbols = getOperationSymbols(str).split(""); // remove all alphanumeric
+  // todo format concat operation
+  // const regexStr = formatRegexString(str);
 
-  var operatedAutomata = popFront(automatas);
+  const regexStr = str;
+  const states = removeOperationSymbols(regexStr).split("");
+  const automatas = states.map(s => createBasicAutomata(s));
+  const operationSymbols = getOperationSymbols(regexStr).split(""); // remove all alphanumeric
+
+  let operatedAutomata = popFront(automatas);
   while (operationSymbols.length) {
     const op = popFront(operationSymbols);
     const fn = selectOperation(op);
@@ -103,6 +107,6 @@ function convertRegexToDFA(str) {
       console.log('skipping unknown symbol: ' + op);
     }
   }
-  console.log(operatedAutomata);
+  console.log('operated automata', operatedAutomata);
   return operatedAutomata;
 }

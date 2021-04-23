@@ -50,8 +50,6 @@ async function drawGrammar() {
 
   for (const rule of productionRules) {
     const row = table.insertRow();
-    console.log(rule);
-
     const cell = row.insertCell();
     var content = rule.non_term + " 🠒 ";
     for (var key in rule.productions) {
@@ -82,7 +80,6 @@ function triggerToast(title, message) {
 }
 
 function showAutomata() {
-  boardInit();
   showElement_('board'); hideElement("syntax-analysis"); hideElement('grammar'); hideElement('regexp');
 }
 

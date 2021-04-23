@@ -1,9 +1,9 @@
 function closureStar(automata) {
-  closure(automata, true);
+  return closure(automata, true);
 }
 
 function closurePlus(automata) {
-  closure(automata, false);
+  return closure(automata, false);
 }
 
 function closure(automata, star = true) {

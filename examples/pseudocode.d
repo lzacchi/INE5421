@@ -1,4 +1,6 @@
-double resultado;
-int tentativas = 10;
-if tentativas < 0 then:
-    resultado = 0;
+int resultado
+int retry = 10
+if retry < 0 then
+    res = 0
+else
+    res = 2

@@ -3,12 +3,13 @@ function analysePseudoCode() {
   const { tokens } = activeJSON();
   const regexes = Object.keys(tokens);
   const automatas = regexes.map(r => {
-    let automata = convertRegexToDFA(r);
-    automata["label"] = tokens[r];
-    return automata;
+    const dfa = convertRegexToDFA(r);
+    const newDFA = minimizeDFA(dfa);
+    newDFA.label = tokens[r];
+    return newDFA;
   });
   const typedTokens = verifySyntax(pseudocodeLexems, automatas);
-  console.log(typedTokens);
+  console.log('typedtokens', typedTokens);
   // to-do print table of lexemes and his type using typedTokens
 
 }

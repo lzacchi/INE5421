@@ -19,7 +19,7 @@ function addOmittedConcatenation(regexStr) {
     const nextCharIndex = charIndex+1;
     const alphanumericRegex = /[A-z]/;
     if (char.match(alphanumericRegex) && regexStr[nextCharIndex] && regexStr[nextCharIndex].match(alphanumericRegex)) {
-      insertStringAt(regexStr, ".", nextCharIndex);
+      regexStr = insertStringAt(regexStr, ".", nextCharIndex);
     }
   }
   return regexStr;
@@ -86,10 +86,7 @@ function popFront(arr) {
 }
 
 function convertRegexToDFA(str) {
-  // todo format concat operation
-  // const regexStr = formatRegexString(str);
-
-  const regexStr = str;
+  const regexStr = formatRegexString(str);
   const states = removeOperationSymbols(regexStr).split("");
   const automatas = states.map(s => createBasicAutomata(s));
   const operationSymbols = getOperationSymbols(regexStr).split(""); // remove all alphanumeric

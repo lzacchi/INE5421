@@ -14,7 +14,6 @@ function draw() {
 }
 
 function drawFiniteAutomata() {
-  const json = editor.getValue();
   const { states, transitions, start, final } = activeJSON();
   board.model = new go.GraphLinksModel(
     states.map(state => {
@@ -45,7 +44,7 @@ async function drawGrammar() {
     div.removeChild(div.firstChild);
   }
   document.getElementById('grammar').innerHTML += "<table class='grammar_table'></table>";
-  const { terminal, nonTerminal, productionRules } = activeJSON();
+  const { productionRules } = activeJSON();
   const table = document.querySelector("table");
 
   for (const rule of productionRules) {
@@ -62,7 +61,7 @@ async function drawGrammar() {
 }
 
 function drawExpression() {
-  json = activeJSON();
+  let json = activeJSON();
   let regexInput = "";
   Object.keys(json.tokens).map(k => {
     regexInput += k + " => " + json.tokens[k] + "\n";
@@ -90,7 +89,7 @@ function showGrammar() {
 }
 
 function showRegex() {
-  // todo load regex no editor da direita
+  regexpInit();
   showElement_('regexp'); hideElement("syntax-analysis"); hideElement('board'); hideElement('grammar');
 }
 
@@ -101,6 +100,26 @@ function showSyntaxAnalysis() {
   showElement_("syntax-analysis"); hideElement('regexp'); hideElement('board'); hideElement('grammar');
 }
 
-function showTokens() {
+function showTokens(tokens) {
+  // to-do
+  let div = document.getElementById("analysis-result-table");
 
+  // wipe residual children divs
+  while (div.firstChild) {
+    div.removeChild(div.firstChild);
+  }
+
+
+  // create empty table
+  // iterate for each token
+  for (let tok of Object.keys(tokens)) {
+    let lexem = tok;
+    let token = tokens[tok];
+    const row = div.insertRow();
+    const cell1 = row.insertCell();
+    const cell2 = row.insertCell();
+    cell1.innerHTML = lexem;
+    cell2.innerHTML = token;
+
+  }
 }

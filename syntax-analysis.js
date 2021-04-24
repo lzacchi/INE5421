@@ -4,14 +4,13 @@ function analysePseudoCode() {
   const regexes = Object.keys(tokens);
   const automatas = regexes.map(r => {
     const dfa = convertRegexToDFA(r);
-    const newDFA = minimizeDFA(dfa);
+    const newDFA = determinizeNFA(dfa);
     newDFA.label = tokens[r];
     return newDFA;
   });
   const typedTokens = verifySyntax(pseudocodeLexems, automatas);
   console.log('typedtokens', typedTokens);
-  // to-do print table of lexemes and his type using typedTokens
-
+  showTokens(typedTokens);
 }
 
 // loops through automata to find which one fits

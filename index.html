@@ -77,6 +77,7 @@
             <a class="btn btn-secondary" href="#" onclick="convertRegexToDFA()">DEBUG: regexToDFA</a>
           </div>
 
+          <hr>
           <h5 style="color: white;text-align: center">Converter:</h5>
           <div id="grafd-button" style="display: block">
             <a class="btn btn-secondary" href="#" onclick="grammarToAutomata()">Gramática -> Autômato</a>
@@ -126,25 +127,24 @@
         <textarea id="pseudocode-input" name="Seu pseudo-código"  cols="30" rows="10"></textarea>
         <br>
         <button id="syntax-analysis" onclick="analysePseudoCode()">Analisar pseudo-código</button>
-        <br>
-        <!-- <div id="tokens-result">
-          <table>
-            <thead>
+      </br></br>
+        <div id="analysis-result">
+          <table class="table">
+            <thead class="thead-dark">
               <tr>
-                <th scope="col">Lexeme</th>
-                <th scope="col">Token</th>
+                <th class="col">Lexema</th >
+                <th class="col">Token</th>
               </tr>
             </thead>
-            <tbody>
-              <th scope="row"></th>
+            <tbody id="analysis-result-table">
+
             </tbody>
           </table>
-        </div>  -->
         </div>
+      </div>
 
       </div>
 
-    </div>
     <div id="edit-json" class="col-4" style="height: 98vh;">
       <!-- Editor placeholder -->
       <div id="editor" style="height: 100%;display: block;" oninput="draw()"></div>

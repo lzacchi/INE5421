@@ -1,3 +1,5 @@
+// Conversão de autômatos finitos determinísticos para gramática
+
 function grammarToAutomata() {
   var grammar = activeJSON();
   var nonTerminal = grammar["nonTerminal"];
@@ -56,7 +58,7 @@ function automataToGrammar() {
   for (const transition in automata.transitions) {
     grammar.terminal.push(automata.transitions[transition].symbol);
     var rule = {
-      "non_term" : automata.transitions[transition].from,
+      "non_term": automata.transitions[transition].from,
       "productions": [automata.transitions[transition].symbol + automata.transitions[transition].to]
     }
     const ruleIndex = grammar.productionRules.findIndex((el) => el.non_term === rule.non_term)

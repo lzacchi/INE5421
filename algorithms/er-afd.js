@@ -1,3 +1,5 @@
+// Conversão de expressões regulares pra automato finito não deterministico
+
 const operations = {
   unary: {
     "+": "non-empty-closure",
@@ -16,7 +18,7 @@ function insertStringAt(str, insertString, position) {
 function addOmittedConcatenation(regexStr) {
   for (let char of regexStr) {
     const charIndex = regexStr.indexOf(char);
-    const nextCharIndex = charIndex+1;
+    const nextCharIndex = charIndex + 1;
     const alphanumericRegex = /[A-z]/;
     if (char.match(alphanumericRegex) && regexStr[nextCharIndex] && regexStr[nextCharIndex].match(alphanumericRegex)) {
       regexStr = insertStringAt(regexStr, ".", nextCharIndex);
@@ -33,7 +35,7 @@ function formatRegexString(regexStr) {
 }
 
 function createBasicAutomata(symbol) {
-  const states = [`start-${symbol}`,`final-${symbol}` ];
+  const states = [`start-${symbol}`, `final-${symbol}`];
   return {
     "type": "finite-automata",
     "start": states[0],

@@ -1,3 +1,6 @@
+// Módulo que manipula a biblioteca GoJS para desenhar os autômatos
+// e outras utilidades para mostrar gramáticas e regex
+
 function draw() {
   const { type } = activeJSON();
   switch (type) {
@@ -108,7 +111,6 @@ function showTokens(tokens) {
   while (div.firstChild) {
     div.removeChild(div.firstChild);
   }
-
 
   // create empty table
   // iterate for each token

@@ -1,3 +1,5 @@
+// Módulo que carrega os exemplos utilizados na página de gramáticas
+
 async function grammarTableInit() {
   var div = document.getElementById("grammar");
   while (div.firstChild) {

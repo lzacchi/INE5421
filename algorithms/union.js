@@ -1,3 +1,5 @@
+// União de autômatos
+
 function union(automataA, automataB) {
   const oldStartStates = [automataA.start, automataB.start];
   const oldFinalStates = automataA.final.concat(automataB.final);

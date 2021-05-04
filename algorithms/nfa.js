@@ -1,3 +1,5 @@
+// Minimização de autômatos não-deterministicos
+
 function epsilonTransitions(state, transitions) {
   // filtering epsilon transitions from 'state'
   const stateTransitions = transitions.filter(t => t.from === state && t.symbol === "&");

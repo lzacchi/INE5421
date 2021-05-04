@@ -1,3 +1,5 @@
+// Módulo com funções utilizadas na página de autômatos regulares
+
 const $ = go.GraphObject.make;
 board = $(go.Diagram, "board", {
   "undoManager.isEnabled": true

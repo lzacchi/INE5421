@@ -1,13 +1,15 @@
+// Fatoração de gramáticas
+
 function splitNTandT(prod, grammar) {
   let t = "";
   let nT = "";
-  for (let i=0; i < prod.length; i++) {
+  for (let i = 0; i < prod.length; i++) {
     if (grammar.terminal.includes(prod[i])) {
       continue;
     } else {
       t = prod.slice(0, i);
       nT = prod.slice(i, prod.length);
-      return {first: t, last: nT};
+      return { first: t, last: nT };
     }
   }
 }
@@ -32,9 +34,9 @@ function removeElement(element, list) {
   }
 }
 
-function factorate(grammar) {
+function factor(grammar) {
   console.log("inicial", grammar);
-  const {type, terminal, nonTerminal, productionRules} = grammar;
+  const { type, terminal, nonTerminal, productionRules } = grammar;
   let newPossibleNT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   for (const letter of nonTerminal) {
     removeElement(letter, newPossibleNT);
@@ -50,7 +52,7 @@ function factorate(grammar) {
   for (const currentNT of nonTerminal) {
     // analisar cada produção dele
     let currentProds = productionRules.filter(p => p.non_term === currentNT)[0];
-		if (currentProds === undefined) {continue;}
+    if (currentProds === undefined) { continue; }
     if (currentProds.productions.length > 1) {
       let splittedProds = currentProds.productions.map(p => splitNTandT(p, grammar)).filter(p => p !== undefined);
       let result = splittedProds.reduce((r, a) => {
@@ -62,9 +64,9 @@ function factorate(grammar) {
           // adding new NonTerminal
           let newNT = newPossibleNT.pop();
           newGrammar.nonTerminal.push(newNT);
-          
+
           // adding new transition to the new NonTerminal
-          addNewProduction(newGrammar, currentNT, key+newNT);
+          addNewProduction(newGrammar, currentNT, key + newNT);
 
           // adding transitions from new NonTerminal
           for (let sHalf of result[key]) {
@@ -77,6 +79,5 @@ function factorate(grammar) {
       }
     }
   }
-  return newGrammar;  
+  return newGrammar;
 }
-console.log("final",factorate(grammar));

@@ -1,3 +1,5 @@
+// Concatenação de autômatos
+
 function concatenation(automataA, automataB) {
   aFinal = automataA.final;
   bStart = automataB.start;

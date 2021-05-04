@@ -1,3 +1,5 @@
+// Algoritmos de verificação de sentença
+
 // generic verification function
 function verify(json, testedString) {
   var state = json.start;

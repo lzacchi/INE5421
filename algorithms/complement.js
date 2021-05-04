@@ -1,3 +1,5 @@
+// Complemento de automatos
+
 function complement(automata) {
   const newFinal = [];
   for (const state of automata.states) {

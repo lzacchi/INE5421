@@ -1,5 +1,9 @@
-const DEBUG = true;
-// const DEBUG = false;
+// Módulo de ações executadas após interação com a interface
+
+// Variável DEBUG global controla a origem dos arquivos de exemplo,
+// coloque em 'true' para carregar os arquivos padrão do computador local
+// const DEBUG = true;
+const DEBUG = false;
 
 function init() {
     boardInit();
@@ -27,14 +31,14 @@ function toggleDiv(id) {
 
 function setEditorText(value, secondEditor = false) {
     const selectedEditor = secondEditor ? editor2 : editor;
-    if (typeof(value) === "object"){
+    if (typeof (value) === "object") {
         selectedEditor.setValue(JSON.stringify(value, null, 4), -1);
     } else {
         selectedEditor.setValue(value, -1);
     }
 }
 
-function toggleEditor(editorName="editor") {
+function toggleEditor(editorName = "editor") {
     const editorState = toggleDiv(editorName);
     let editorButton = document.querySelector("#editor-button");
     switch (editorState) {

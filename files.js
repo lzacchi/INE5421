@@ -1,3 +1,6 @@
+// Manipulação do JSON exibido no editor lateral
+// Interação com os botões de download/upload
+
 function activeJSON() {
   const txt = editor.getValue();
   var ret

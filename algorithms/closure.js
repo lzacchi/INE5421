@@ -1,3 +1,5 @@
+// Fecho * e + de autômatos regulares
+
 function closureStar(automata) {
   return closure(automata, true);
 }

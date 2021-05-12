@@ -14,6 +14,15 @@ function splitNTandT(prod, grammar) {
   }
 }
 
+function hasOnlyTerminals(prod, grammar) {
+  for (let symbol of prod) {
+    if (!grammar.terminal.includes(symbol)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function addNewProduction(grammar, nonTerm, production) {
   let existingProds = grammar.productionRules.filter(p => p.non_term === nonTerm);
   if (existingProds.length === 0) {
@@ -33,9 +42,16 @@ function removeElement(element, list) {
     return list.splice(here, 1);
   }
 }
-
+function handleFactorButton(grammar) {
+  if (grammar.type !== "regular-grammar" && grammar.type !== "free-context-grammar") {
+    alert("O objeto no editor não é do tipo 'regular-grammar' ou 'free-context-grammar'. Selecione um modelo válido.");
+    return false;
+  }
+  let newGrammar = factor(grammar);
+  setEditorText(newGrammar, false);
+  draw();
+}
 function factor(grammar) {
-  console.log("inicial", grammar);
   const { type, terminal, nonTerminal, productionRules } = grammar;
   let newPossibleNT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   for (const letter of nonTerminal) {
@@ -48,9 +64,8 @@ function factor(grammar) {
     "nonTerminal": [...nonTerminal],
     "productionRules": []
   }
-  // pra cada não terminal
+
   for (const currentNT of nonTerminal) {
-    // analisar cada produção dele
     let currentProds = productionRules.filter(p => p.non_term === currentNT)[0];
     if (currentProds === undefined) { continue; }
     if (currentProds.productions.length > 1) {
@@ -77,6 +92,9 @@ function factor(grammar) {
           addNewProduction(newGrammar, currentNT, key.concat(result[key][0]));
         }
       }
+    } else {
+      let newProd = currentProds.productions[0];
+      addNewProduction(newGrammar, currentNT, newProd);
     }
   }
   return newGrammar;

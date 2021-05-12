@@ -24,7 +24,6 @@
         {
             "non_term": "A",
             "productions": [
-                "a",
                 "aC"
             ]
         },
@@ -37,20 +36,19 @@
         {
             "non_term": "C",
             "productions": [
-                "aA"
+                "a"
             ]
         },
         {
             "non_term": "D",
             "productions": [
-                "a",
                 "aE"
             ]
         },
         {
             "non_term": "E",
             "productions": [
-                "aB"
+                "b"
             ]
         }
     ]
